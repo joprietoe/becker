@@ -126,4 +126,8 @@ class Consulta
     {
         return $this->paciente;
     }
+    
+    public function __toString() {
+        return $this->getObservacao();
+    }
 }
