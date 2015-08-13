@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/var/www/html/becker/src/ReportsBundle/Controller/DefaultController.php</file>
+            <file>file:/var/www/html/becker/src/ReportsBundle/Resources/config/routing.yml</file>
+            <file>file:/var/www/html/becker/src/ReportsBundle/Resources/views/Default/dashboard.html.twig</file>
+            <file>file:/var/www/html/becker/app/Resources/views/layout.html.twig</file>
+            <file>file:/var/www/html/becker/web/bundles/general/js/_others/filter.js</file>
+        </group>
+    </open-files>
+</project-private>

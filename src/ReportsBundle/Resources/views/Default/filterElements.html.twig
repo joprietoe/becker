@@ -1,0 +1,10 @@
+<div id="filters" class="btn-group">
+    {% for f in filters %}
+        <a id="{{f.id}}" class="actfilter btn" onclick="{{f.onclick}}()">
+            <span class="glyphicon glyphicon-remove"></span>
+            <small class="text-muted">
+                {{f.name}}
+            </small>
+        </a>
+    {% endfor %}
+</div>

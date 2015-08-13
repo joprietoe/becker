@@ -1,0 +1,7 @@
+daily_work_homepage:
+    path:     /
+    defaults: { _controller: DailyWorkBundle:Default:index }
+    
+daily_work:
+    path:    /dw
+    defaults: { _controller: DailyWorkBundle:Default:daily_work }

@@ -1,0 +1,168 @@
+{# empty Twig template #}
+{% extends 'layout.html.twig' %}
+
+{% block page_content %}
+<div class="page-content">
+    <div class="page-header">
+
+        <h1>
+            Maneje seus pacientes:
+        </h1>
+    </div><!-- /.page-header -->
+    
+    <div id="accordion1" class="accordion-style2 panel-group no-padding-right">
+        <div class="panel panel-default">
+
+            <label class="panel-title  blue  accordion-submenu" id="acoordion-title1">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 
+                    Seleccionar paciente
+                    <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down " data-icon-show="icon-double-angle-right"></i>
+                </a>
+            </label>
+            <div class="space" > </div> 
+            <div class="panel-collapse collapse in" id="collapseOne">	
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="table-responsive">
+
+                            <table id="sample-table-2" class="table table-striped table-bordered table-hover ">
+                                <thead>
+                                    <tr>
+
+                                        <!-- <th class="center">Seleccionar</th> -->                                        
+                                        <th class="center">Nome Paciente</th>
+                                        <th class="hidden-480 center">Responsavels</th>
+                                        <th class="hidden-480 center">Endereco</th>                                       
+                                        <th class="hidden-480 center">Dado 4</th>
+                                        <th class="center">Acciones</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    {# for proyecto in result #}
+                                    <tr>
+                                        <td class="center">
+                                            <ul class="list-unstyled spaced2 pnome">
+                                                <li class="muted align-left align-middle">
+                                                    <i class="icon-angle-right bigger-110"></i>
+                                                    <a>{{paciente.nome}}</a>                                            
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="center">
+                                            <ul class="list-unstyled spaced2">
+                                                {%for p in paciente.responsavel %}
+                                                    <li class="muted align-left">
+                                                        <i class="icon-angle-right bigger-110"></i>
+                                                        {{p.nome}} - {{p.email}} - {{p.telefContato}}  </li>
+                                                {%endfor%}
+                                            </ul>
+                                        </td>
+
+                                        <td class="hidden-480 center">                                            
+                                            <ul class="list-unstyled spaced2">                                              
+                                                    <li class="muted align-left">
+                                                        <i class="icon-angle-right bigger-110"></i>
+                                                        {{paciente.endereco}}
+                                                    </li>                                               
+                                            </ul>
+                                        </td>
+                                        
+                                        
+                                            <td class="hidden-480 center">{#{paciente.nome}#}</td> <!--debe ser un nombre de tipo usuario-->
+                                            <td class="center">
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+
+                                                    <button  name="{#proyecto.id#}" value="{# app.request.BaseUrl #}" onclick="//mostrar_proyecto(this)" class="btn btn-link btn-link-ajustado tooltip-info " data-placement="bottom" data-rel="tooltip" data-original-title="Ver">
+                                                        <i class="icon-zoom-in bigger-130 blue"></i>
+                                                    </button>                                                        
+
+
+                                                    <form action="{#path('listado_por_proyecto')#}" method="post">
+                                                        <button name= "fase" value="{#proyecto.id#}" class="btn btn-link btn-link-ajustado tooltip-info" data-rel="tooltip" data-placement="bottom" type="submit"
+                                                                title="Atualizar">
+                                                            <i class="icon-pencil bigger-130 blue green"></i>
+                                                        </button>
+
+                                                        <button name="tarea" value="{#proyecto.id#}" class="btn btn-link btn-link-ajustado tooltip-light" data-rel="tooltip" data-placement="bottom" type="submit"
+                                                                title="Fazer Consulta">
+                                                            <i class="icon-sort-by-attributes-alt bigger-130 light-blue"></i>
+                                                        </button>
+
+
+                                                        <button name="subtarea" value="{#proyecto.id#}" class="btn btn-link btn-link-ajustado tooltip-default" data-rel="tooltip" data-placement="bottom"  type="submit"
+                                                                title="Apagar">
+                                                            <i class="icon-trash bigger-130 red"></i>
+                                                        </button>
+                                                    </form>     
+
+                                                </div>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <button  name="{#proyecto.id#}" value="{# app.request.BaseUrl #}" onclick="mostrar_proyecto(this)" class="btn btn-link btn-link-ajustado tooltip-info " data-placement="bottom" data-rel="tooltip" data-original-title="Ver">
+                                                                    <i class="icon-zoom-in bigger-130 blue"></i>
+                                                                </button>
+                                                            </li>
+                                                            
+                                                            <form action="{#path('listado_por_proyecto')#}" method="post">
+
+                                                                <li>  
+                                                                    <button name= "fase" value="{#proyecto.id#}" class="btn btn-link btn-link-ajustado tooltip-info" data-rel="tooltip" data-placement="bottom" type="submit"
+                                                                            title="Fases">
+                                                                        <i class="icon-cog bigger-130 blue"></i>
+                                                                    </button> 
+                                                                </li>
+                                                                <li>  
+
+                                                                    <button name="tarea" value="{#proyecto.id#}" class="btn btn-link btn-link-ajustado tooltip-light" data-rel="tooltip" data-placement="bottom" type="submit"
+                                                                            title="Tareas">
+                                                                        <i class="icon-cogs bigger-130 light-blue"></i>
+                                                                    </button>
+                                                                </li>
+                                                                <li>  
+                                                                    <button name="subtarea" value="{#proyecto.id#}" class="btn btn-link btn-link-ajustado tooltip-default" data-rel="tooltip" data-placement="bottom"  type="submit"
+                                                                            title="Subtareas">
+                                                                        <i class="icon-align-center bigger-130 grey"></i>
+                                                                    </button>
+
+                                                                </li>
+                                                            </form>   
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        {# endfor #}
+
+
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="space" > </div> 	
+
+        {# include 'modal_forms_proyecto.html.twig' #}
+    </div><!-- /.page-content -->
+{% endblock page_content %}
