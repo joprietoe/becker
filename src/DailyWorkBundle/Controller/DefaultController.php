@@ -12,8 +12,8 @@ class DefaultController extends Controller
         
         //Datos personales
         $formulario = $this->createForm(new \DailyWorkBundle\Form\Paciente\PacienteType(),$paciente);
-        //return $this->render('DailyWorkBundle:Default:ins_ficha.html.twig', array('formulario' => $formulario->createView()));        
-        return $this->consultaAction(1);
+        return $this->render('DailyWorkBundle:Default:ins_ficha.html.twig', array('formulario' => $formulario->createView()));        
+        //return $this->consultaAction(1);
     }
     
     public function daily_workAction()

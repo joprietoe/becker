@@ -234,6 +234,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::daily_workAction',  '_route' => 'daily_work',);
             }
 
+            // consulta_page
+            if (preg_match('#^/d_w/(?P<id_paciente>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'consulta_page')), array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::consultaAction',));
+            }
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

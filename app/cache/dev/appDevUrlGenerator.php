@@ -44,6 +44,7 @@ class appDevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         'entity_homepage' => array (  0 =>   array (    0 => 'name',  ),  1 =>   array (    '_controller' => 'EntityBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'name',    ),    1 =>     array (      0 => 'text',      1 => '/e/hello',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'daily_work_homepage' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/d_w/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'daily_work' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::daily_workAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/d_w/dw',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'consulta_page' => array (  0 =>   array (    0 => 'id_paciente',  ),  1 =>   array (    '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::consultaAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'id_paciente',    ),    1 =>     array (      0 => 'text',      1 => '/d_w',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
     );
 
     /**
