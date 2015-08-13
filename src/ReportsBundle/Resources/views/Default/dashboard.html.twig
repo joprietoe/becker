@@ -7,23 +7,32 @@
 {% block page_content %} 
 
     <div class="page-content">
-        <div class="page-header">
+        <div class="page-header row">
+            <div class="col-md-4 col-sm-4">
+                <h1>
+                    Maneje seus pacientes:
+                </h1>
+            </div>
+            <div class="col-md-offset-6 col-sm-offset-6 col-md-2 col-sm-3">
+                <a href="#" class="btn btn-app btn-info btn-sm no-radius" >
+                    <i class="icon-envelope bigger-230"></i>
+                    MailList
+                </a>
+            </div>
 
-            <h1>
-                Maneje seus pacientes:
-            </h1>
         </div><!-- /.page-header -->
 
         <div id="accordion1" class="accordion-style2 panel-group no-padding-right">
             <div class="panel panel-default">
-
-                <label class="panel-title  blue  accordion-submenu" id="acoordion-title1">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 
-                        Criterio Filtragem
-                        <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down " data-icon-show="icon-double-angle-right"></i>
-                        <div id="filters">{{render(controller('ReportsBundle:Default:filterPage'))}}</div>
-                    </a>
-                </label>
+                <div class="row">
+                    <label class="col-md-2 col-sm-2 panel-title  blue  accordion-submenu" id="acoordion-title1">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 
+                            Criterio Filtragem
+                            <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down " data-icon-show="icon-double-angle-right"></i>
+                        </a>
+                    </label>
+                    <div id="filters" class="col-md-8 col-sm-8">{{render(controller('ReportsBundle:Default:filterPage'))}}</div>
+                </div>
                 <div class="space" > </div> 
                 <div class="panel-collapse collapse in" id="collapseOne">	
 

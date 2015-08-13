@@ -31,8 +31,8 @@ function addFilter(id,text, onClick){
         num = text.length;
         points = '';
     }
-    var elem = $('<a id="'+id+''+'" class="actfilter btn"><span class="glyphicon glyphicon-remove"></span><small class="text-muted">'+
-            text.substr(0,num)+points+'</small></a>');
+    var elem = $('<a id="'+id+''+'" class="actfilter"> <span  class="label label-lg label-pink arrowed-right" style="cursor: hand;" >'+
+            text.substr(0,num)+points+'</span></a>');
     $('#filters').append(elem);
     elem.click(onClick);
 };

@@ -71,7 +71,7 @@ class FilterNome extends Filter{
                 $num = strlen($this->name);
                 $points = '';
             }
-            $name = substr($this->name,0,$num);
+            $name = substr($this->name,0,$num).$points;
             return array (
                 array ('name' => $name,'id' => 'filtName','onclick' => 'nomeDelete')
             );

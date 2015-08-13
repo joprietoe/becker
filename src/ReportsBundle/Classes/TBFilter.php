@@ -69,6 +69,21 @@ class TBFilter extends Filter{
          
         return Array();
     }
+    public function hasMatch(){
+        if($this->name != null && trim($this->name)!=''){
+            return true;
+        }
+        return false;
+    } 
+    public function filtercount(){
+        if(hasMatch()){
+            return 1;
+        }
+        return 0;
+    }
+    public function getOnclik(){
+        return 'bloodDelete';
+    }
     public function filterValues($doctrine){
         
         $repositoryTB = $this->getManager()->getRepository('AppBReportsBundle:NTipoSanguineo');
