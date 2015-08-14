@@ -75,6 +75,13 @@ class TBFilter extends Filter{
         }
         return false;
     } 
+    public function fromDQL($obj){
+        return "";
+        # JOIN ...
+    }
+    public function whereDQL($obj){
+        return $obj.'.'.'nTipoSanguineo LIKE :id ';
+    }
     public function filtercount(){
         if(hasMatch()){
             return 1;

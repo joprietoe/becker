@@ -15,8 +15,8 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8 = $this->env->getExtension("native_profiler");
-        $__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8->enter($__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "ReportsBundle:Default:data.html.twig"));
+        $__internal_55e2156312efec0191b931eff1e9ef03af5db1eac3e7b24f68eabb834b20b1f8 = $this->env->getExtension("native_profiler");
+        $__internal_55e2156312efec0191b931eff1e9ef03af5db1eac3e7b24f68eabb834b20b1f8->enter($__internal_55e2156312efec0191b931eff1e9ef03af5db1eac3e7b24f68eabb834b20b1f8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "ReportsBundle:Default:data.html.twig"));
 
         // line 1
         $context['_parent'] = (array) $context;
@@ -28,8 +28,11 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
             <ul class=\"list-unstyled spaced2 pnome\">
                 <li class=\"muted align-left align-middle\">
                     <i class=\"icon-angle-right bigger-110\"></i>
-                    <a>";
+                    <a href=\"";
             // line 7
+            echo $this->env->getExtension('routing')->getPath("reports_homepage");
+            echo twig_escape_filter($this->env, $this->getAttribute($context["d"], "idPaciente", array()), "html", null, true);
+            echo "/patient\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["d"], "nome", array()), "html", null, true);
             echo "</a>                                            
                 </li>
@@ -84,7 +87,10 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
                 <button  name=\"";
             // line 35
             echo "\" value=\"";
-            echo "\" onclick=\"//mostrar_proyecto(this)\" class=\"btn btn-link btn-link-ajustado tooltip-info \" data-placement=\"bottom\" data-rel=\"tooltip\" data-original-title=\"Editar\">
+            echo "\" onclick=\"window.location.replace('";
+            echo $this->env->getExtension('routing')->getPath("reports_homepage");
+            echo twig_escape_filter($this->env, $this->getAttribute($context["d"], "idPaciente", array()), "html", null, true);
+            echo "/patient');\" class=\"btn btn-link btn-link-ajustado tooltip-info \" data-placement=\"bottom\" data-rel=\"tooltip\" data-original-title=\"Editar\">
                     <i class=\"icon-edit bigger-230 blue\"></i>
                 </button>    
                 <button name=\"subtarea\" value=\"";
@@ -190,7 +196,7 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
 
 ";
         
-        $__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8->leave($__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8_prof);
+        $__internal_55e2156312efec0191b931eff1e9ef03af5db1eac3e7b24f68eabb834b20b1f8->leave($__internal_55e2156312efec0191b931eff1e9ef03af5db1eac3e7b24f68eabb834b20b1f8_prof);
 
     }
 
@@ -206,6 +212,6 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
 
     public function getDebugInfo()
     {
-        return array (  186 => 108,  166 => 93,  158 => 87,  149 => 80,  144 => 77,  136 => 72,  118 => 56,  110 => 50,  103 => 45,  100 => 44,  92 => 38,  86 => 35,  80 => 31,  71 => 25,  62 => 18,  50 => 16,  46 => 14,  42 => 13,  33 => 7,  26 => 2,  22 => 1,);
+        return array (  192 => 108,  172 => 93,  164 => 87,  155 => 80,  150 => 77,  142 => 72,  124 => 56,  116 => 50,  109 => 45,  106 => 44,  98 => 38,  89 => 35,  83 => 31,  74 => 25,  65 => 18,  53 => 16,  49 => 14,  45 => 13,  33 => 7,  26 => 2,  22 => 1,);
     }
 }

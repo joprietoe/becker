@@ -151,6 +151,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'reports_page')), array (  '_controller' => 'ReportsBundle\\Controller\\DefaultController::indexPageAction',));
             }
 
+            // reports_patient
+            if (preg_match('#^/r/(?P<id>[^/]++)/patient$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'reports_patient')), array (  '_controller' => 'ReportsBundle\\Controller\\DefaultController::patientRedirectAction',));
+            }
+
         }
 
         // portada

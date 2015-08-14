@@ -4,6 +4,7 @@ namespace ReportsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use ReportsBundle\Classes\FilterNome;
 
 class DefaultController extends Controller {
@@ -161,6 +162,10 @@ class DefaultController extends Controller {
         }
 
         return $docQuery->getResult();
+    }
+    public function patientRedirectAction($id){
+        return new RedirectResponse($this->generateUrl('inicio'));
+        # return new RedirectResponse($this->generateUrl('-----').$id);
     }
 
 }
