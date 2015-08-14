@@ -82,6 +82,12 @@ class TBFilter extends Filter{
     public function whereDQL($obj){
         return $obj.'.'.'nTipoSanguineo LIKE :id ';
     }
+    public function setFilter($query){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        if($this->name != null){
+            $query->setParameter('id', '%'.$this->name.'%');
+        }
+        return $query;
+    }
     public function filtercount(){
         if(hasMatch()){
             return 1;
