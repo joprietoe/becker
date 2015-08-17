@@ -28,10 +28,22 @@ class ResponsavelType extends AbstractType{
                 ->add('ocupacao')
                 ->add('telefContato', 'text',  array('label' => 'Telef de Contato'))
                 ->add('email', 'email')
+                //->add('nome1', 'text')
+                //->add('ocupacao1')
+                //->add('telefContato1', 'text',  array('label' => 'Telef de Contato'))
+                //->add('email1', 'email');
+                ->add('ordenresponsavels', 'collection', array(
+                    'type'           => new OneResponsavelType(),
+                    //'label'          => 'Direcciones',
+                    'by_reference'   => false,
+                    'allow_delete'   => true,
+                    'allow_add'      => true,
+                    ))
                 ->add('nome1', 'text')
                 ->add('ocupacao1')
                 ->add('telefContato1', 'text',  array('label' => 'Telef de Contato'))
                 ->add('email1', 'email');
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

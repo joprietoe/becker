@@ -3,11 +3,13 @@
 namespace EntityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Endereco
  *
- * @ORM\Table(name="endereco", uniqueConstraints={@ORM\UniqueConstraint(name="endereco_cep_key", columns={"cep"})})
+ * @ORM\Table(name="endereco")
  * @ORM\Entity
  */
 class Endereco
@@ -29,8 +31,19 @@ class Endereco
      */
     private $cep;
 
+     /**
+     * Bidirectional INVERSED SIDE
+     * @var \Paciente
+     *
+     * @ORM\OneToMany(targetEntity="Paciente", mappedBy="endereco", cascade={"persist", "remove"})
+     * 
+     */
+    private $pacientes;
+        
 
-
+    public function __construct() {
+        $this->pacientes = new ArrayCollection();;
+    }
     /**
      * Get idEndereco
      *
@@ -64,6 +77,19 @@ class Endereco
         return $this->cep;
     }
     
+    public function setPaciente(ArrayCollection $pacientes){
+         
+        $this->pacientes = $pacientes;
+        foreach ($pacientes as $paciente) {
+            $paciente->setEndereco($this); 
+        }
+    }
+    
+    public function getPaciente(){
+        return $this->pacientes;
+    }
+
+
     public function __toString() {
         return strval($this->getCep());
     }

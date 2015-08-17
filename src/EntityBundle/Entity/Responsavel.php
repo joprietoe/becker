@@ -51,33 +51,16 @@ class Responsavel
     private $email;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_paciente", type="integer", nullable=false)
+     * @ORM\OneToMany(targetEntity="Orden_Responsavel", mappedBy="responsavel", cascade={"persist", "remove"}, orphanRemoval=TRUE)
      */
-    private $idPaciente;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Paciente", inversedBy="responsavel")
-     * @ORM\JoinTable(name="responsavel_paciente",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="responsavel", referencedColumnName="id_responsavel")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="paciente", referencedColumnName="id_paciente")
-     *   }
-     * )
-     */
-    private $paciente;
+    private $ordenResponsavels;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->paciente = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ordenResponsavels = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -182,62 +165,98 @@ class Responsavel
     {
         return $this->email;
     }
+    
+    public function getOrdenResponsavels()
+    {
+        return $this->ordenResponsavels->toArray();
+    }
+    
+    
+    public function addOrdenResponsavels(Orden_Responsavel $o_responsavel)
+    {
+        if (!$this->ordenResponsavels->contains($o_responsavel)) {
+            $this->ordenResponsavels->add($o_responsavel);
+            $o_responsavel->setResponsavel($this);
+        }
+
+        return $this;
+    }
+    
+    public function removeOrdenResponsavels(Orden_Responsavel $o_responsavel)
+    {
+        if ($this->ordenResponsavels->contains($o_responsavel)) {
+            $this->ordenResponsavels->removeElement($o_responsavel);
+            $o_responsavel->setResponsavel(null);
+        }
+
+        return $this;
+    }
+    
+    public function getPacientes()
+    {
+        return array_map(
+            function ($ordenResponsavels) {
+                return $ordenResponsavels->getPaciente();
+            },
+            $this->ordenResponsavels->toArray()
+        );
+    }
 
     /**
      * Set idPaciente
      *
      * @param integer $idPaciente
      * @return Responsavel
-     */
+     *
     public function setIdPaciente($idPaciente)
     {
         $this->idPaciente = $idPaciente;
 
         return $this;
-    }
+    }*/
 
     /**
      * Get idPaciente
      *
      * @return integer 
-     */
+     *
     public function getIdPaciente()
     {
         return $this->idPaciente;
-    }
+    }*/
 
     /**
      * Add paciente
      *
      * @param \EntityBundle\Entity\Paciente $paciente
      * @return Responsavel
-     */
+     *
     public function addPaciente(\EntityBundle\Entity\Paciente $paciente)
     {
         $this->paciente[] = $paciente;
 
         return $this;
-    }
+    }*/
 
     /**
      * Remove paciente
      *
      * @param \EntityBundle\Entity\Paciente $paciente
-     */
+     *
     public function removePaciente(\EntityBundle\Entity\Paciente $paciente)
     {
         $this->paciente->removeElement($paciente);
-    }
+    }*/
 
     /**
      * Get paciente
      *
      * @return \Doctrine\Common\Collections\Collection 
-     */
+     *
     public function getPaciente()
     {
         return $this->paciente;
-    }
+    }*/
     
     public function __toString() {
         return $this->getNome();

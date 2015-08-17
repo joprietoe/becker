@@ -7,5 +7,9 @@ daily_work:
     defaults: { _controller: DailyWorkBundle:Default:daily_work }
 
 consulta_page:
-    path: /{id_paciente}
+    path: /dw/{id_paciente}
     defaults: { _controller: DailyWorkBundle:Default:consulta }
+
+actualizar_page:
+    path: /dw/dw_e/{id_paciente}
+    defaults: { _controller: DailyWorkBundle:Default:actualizar }

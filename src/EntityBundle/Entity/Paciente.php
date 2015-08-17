@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Paciente
  *
- * @ORM\Table(name="paciente", indexes={@ORM\Index(name="IDX_C6CBA95EF8E0D60E", columns={"endereco"}), @ORM\Index(name="IDX_C6CBA95EC9875994", columns={"n_tipo_parto"}), @ORM\Index(name="IDX_C6CBA95E117040A9", columns={"n_tipo_sanguineo"})})
+ * @ORM\Table(name="paciente")
  * @ORM\Entity
  */
 class Paciente
@@ -35,13 +35,6 @@ class Paciente
      * @ORM\Column(name="data_nascimento", type="date", nullable=true)
      */
     private $dataNascimento;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="factor_rh", type="string", length=255, nullable=true)
-     */
-    private $factorRh;
 
     /**
      * @var string
@@ -96,70 +89,56 @@ class Paciente
     private $endereco;
 
     /**
-     * @var \NTipoParto
+     * @var \TipoParto
      *
-     * @ORM\ManyToOne(targetEntity="NTipoParto")
+     * @ORM\OneToOne(targetEntity="TipoParto")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="n_tipo_parto", referencedColumnName="id_tipo_parto")
+     *   @ORM\JoinColumn(name="tipoParto", referencedColumnName="idtipoparto")
      * })
      */
-    private $nTipoParto;
+    private $tipoParto;
 
     /**
-     * @var \NTipoSanguineo
+     * @var \TipoSanguineo
      *
-     * @ORM\ManyToOne(targetEntity="NTipoSanguineo")
+     * @ORM\OneToOne(targetEntity="TipoSanguineo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="n_tipo_sanguineo", referencedColumnName="id_tipo_sanguineo")
+     *   @ORM\JoinColumn(name="tipoSanguineo", referencedColumnName="idtiposanguineo")
      * })
      */
-    private $nTipoSanguineo;
+    private $tipoSanguineo;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="NCuidados", inversedBy="paciente")
-     * @ORM\JoinTable(name="paciente_n_cuidados  ",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="paciente", referencedColumnName="id_paciente")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="n_cuidados", referencedColumnName="id_cuidado")
-     *   }
-     * )
+     * @ORM\OneToMany(targetEntity="Paciente_Cuidado", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
      */
     private $nCuidados;
 
-    /**
+   /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="NProblemasSaude", inversedBy="pacienteid")
-     * @ORM\JoinTable(name="paciente_problemas_saude",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="pacienteid", referencedColumnName="id_paciente")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="n_problemas_saude", referencedColumnName="id_problemas_saude")
-     *   }
-     * )
+     * @ORM\ManyToMany(targetEntity="Paciente_ProblemasSaude", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
      */
-    private $nProblemasSaude;
+    private $problemasSaudes;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Responsavel", mappedBy="paciente")
+     * @ORM\ManyToMany(targetEntity="Orden_Responsavel", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
      */
-    private $responsavel;
-
+    private $ordenResponsavels;
+    
+        
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->nCuidados = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->nProblemasSaude = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->responsavel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->problemasSaudes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ordenResponsavels = new \Doctrine\Common\Collections\ArrayCollection();
+       // $this->consultas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -219,29 +198,7 @@ class Paciente
         return $this->dataNascimento;
     }
 
-    /**
-     * Set factorRh
-     *
-     * @param string $factorRh
-     * @return Paciente
-     */
-    public function setFactorRh($factorRh)
-    {
-        $this->factorRh = $factorRh;
-
-        return $this;
-    }
-
-    /**
-     * Get factorRh
-     *
-     * @return string 
-     */
-    public function getFactorRh()
-    {
-        return $this->factorRh;
-    }
-
+   
     /**
      * Set problemasGravidez
      *
@@ -380,12 +337,7 @@ class Paciente
         return $this->leiteMaternoIdade;
     }
 
-    /**
-     * Set endereco
-     *
-     * @param \EntityBundle\Entity\Endereco $endereco
-     * @return Paciente
-     */
+
     public function setEndereco(\EntityBundle\Entity\Endereco $endereco = null)
     {
         $this->endereco = $endereco;
@@ -404,60 +356,63 @@ class Paciente
     }
 
     /**
-     * Set nTipoParto
+     * Set TipoParto
      *
-     * @param \EntityBundle\Entity\NTipoParto $nTipoParto
+     * @param \EntityBundle\Entity\TipoParto $tipoParto
      * @return Paciente
      */
-    public function setNTipoParto(\EntityBundle\Entity\NTipoParto $nTipoParto = null)
+    public function setTipoParto(\EntityBundle\Entity\TipoParto $tipoParto = null)
     {
-        $this->nTipoParto = $nTipoParto;
+        $this->tipoParto = $tipoParto;
 
         return $this;
     }
 
     /**
-     * Get nTipoParto
+     * Get TipoParto
      *
-     * @return \EntityBundle\Entity\NTipoParto 
+     * @return \EntityBundle\Entity\TipoParto 
      */
-    public function getNTipoParto()
+    public function getTipoParto()
     {
-        return $this->nTipoParto;
+        return $this->tipoParto;
     }
 
     /**
      * Set nTipoSanguineo
      *
-     * @param \EntityBundle\Entity\NTipoSanguineo $nTipoSanguineo
+     * @param \EntityBundle\Entity\TipoSanguineo $tipoSanguineo
      * @return Paciente
      */
-    public function setNTipoSanguineo(\EntityBundle\Entity\NTipoSanguineo $nTipoSanguineo = null)
+    public function setTipoSanguineo(\EntityBundle\Entity\TipoSanguineo $nTipoSanguineo)
     {
-        $this->nTipoSanguineo = $nTipoSanguineo;
+        $this->tipoSanguineo = $nTipoSanguineo;
 
         return $this;
     }
 
     /**
-     * Get nTipoSanguineo
+     * Get TipoSanguineo
      *
-     * @return \EntityBundle\Entity\NTipoSanguineo 
+     * @return \EntityBundle\Entity\TipoSanguineo 
      */
-    public function getNTipoSanguineo()
+    public function getTipoSanguineo()
     {
-        return $this->nTipoSanguineo;
+        return $this->tipoSanguineo;
     }
 
     /**
      * Add nCuidados
      *
-     * @param \EntityBundle\Entity\NCuidados $nCuidados
+     * @param \EntityBundle\Entity\Cuidados $nCuidados
      * @return Paciente
      */
-    public function addNCuidado(\EntityBundle\Entity\NCuidados $nCuidados)
+    public function addNCuidado(\EntityBundle\Entity\Paciente_Cuidado $nCuidados)
     {
-        $this->nCuidados[] = $nCuidados;
+        if (!$this->nCuidados->contains($nCuidados)) {
+            $this->nCuidados->add($nCuidados);
+            $nCuidados->setPaciente($this);
+        }
 
         return $this;
     }
@@ -465,11 +420,17 @@ class Paciente
     /**
      * Remove nCuidados
      *
-     * @param \EntityBundle\Entity\NCuidados $nCuidados
+     * @param \EntityBundle\Entity\Paciente_Cuidado $nCuidados
      */
-    public function removeNCuidado(\EntityBundle\Entity\NCuidados $nCuidados)
+    public function removeNCuidado(\EntityBundle\Entity\Paciente_Cuidado $nCuidados)
     {
-        $this->nCuidados->removeElement($nCuidados);
+         $this->nCuidados->removeElement($nCuidados);
+        if ($this->nCuidados->contains($nCuidados)) {
+            $this->nCuidados->removeElement($nCuidados);
+            $nCuidados->setPaciente(null);
+        }
+        
+        return $this;
     }
 
     /**
@@ -479,30 +440,41 @@ class Paciente
      */
     public function getNCuidados()
     {
-        return $this->nCuidados;
+        return array_map(
+            function ($nCuidados) {
+                return $nCuidados->getCuidado();
+            },
+            $this->nCuidados->toArray()
+        );
     }
 
     /**
      * Add nProblemasSaude
      *
-     * @param \EntityBundle\Entity\NProblemasSaude $nProblemasSaude
+     * @param \EntityBundle\Entity\ProblemasSaude $nProblemasSaude
      * @return Paciente
      */
-    public function addNProblemasSaude(\EntityBundle\Entity\NProblemasSaude $nProblemasSaude)
+    public function addProblemasSaude(\EntityBundle\Entity\Orden_Responsavel $p_problemassaude)
     {
-        $this->nProblemasSaude[] = $nProblemasSaude;
+         if (!$this->problemasSaudes->contains($p_problemassaude)) {
+            $this->problemasSaudes->add($p_problemassaude);
+            $p_problemassaude->setPaciente($this);
+        }
 
         return $this;
     }
 
-    /**
-     * Remove nProblemasSaude
-     *
-     * @param \EntityBundle\Entity\NProblemasSaude $nProblemasSaude
-     */
-    public function removeNProblemasSaude(\EntityBundle\Entity\NProblemasSaude $nProblemasSaude)
+    
+    
+    public function removePacienteProblemasSaude(\EntityBundle\Entity\Paciente_ProblemasSaude $p_problemassaude)
     {
-        $this->nProblemasSaude->removeElement($nProblemasSaude);
+        $this->problemasSaudes->removeElement($o_responsavel);
+        if ($this->problemasSaudes->contains($o_responsavel)) {
+            $this->problemasSaudes->removeElement($o_responsavel);
+            $p_problemassaude->setPaciente(null);
+        }
+        
+        return $this;
     }
 
     /**
@@ -510,10 +482,17 @@ class Paciente
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getNProblemasSaude()
+    public function getProblemasSaude()
     {
-        return $this->nProblemasSaude;
+        return array_map(
+            function ($problemasSaudes) {
+                return $problemasSaudes->getProblemaSaude();
+            },
+            $this->problemasSaudes->toArray()
+        );
     }
+
+
 
     /**
      * Add responsavel
@@ -521,23 +500,35 @@ class Paciente
      * @param \EntityBundle\Entity\Responsavel $responsavel
      * @return Paciente
      */
-    public function addResponsavel(\EntityBundle\Entity\Responsavel $responsavel)
+    public function addOrdenResponsavel(\EntityBundle\Entity\Orden_Responsavel $o_responsavel)
     {
-        $this->responsavel[] = $responsavel;
+        //$this->responsavel[] = $responsavel;
+        if (!$this->ordenResponsavels->contains($o_responsavel)) {
+            $this->ordenResponsavels->add($o_responsavel);
+            $o_responsavel->setPaciente($this);
+        }
 
         return $this;
     }
 
+    
     /**
      * Remove responsavel
      *
      * @param \EntityBundle\Entity\Responsavel $responsavel
      */
-    public function removeResponsavel(\EntityBundle\Entity\Responsavel $responsavel)
+    public function removeOrdenResponsavel(\EntityBundle\Entity\Orden_Responsavel $o_responsavel)
     {
-        $this->responsavel->removeElement($responsavel);
+        $this->ordenResponsavels->removeElement($o_responsavel);
+        if ($this->ordenResponsavels->contains($o_responsavel)) {
+            $this->ordenResponsavels->removeElement($o_responsavel);
+            $o_responsavel->setPaciente(null);
+        }
+        
+        return $this;
     }
-
+    
+   
     /**
      * Get responsavel
      *
@@ -545,6 +536,12 @@ class Paciente
      */
     public function getResponsavel()
     {
-        return $this->responsavel;
+        return array_map(
+            function ($ordenResponsavels) {
+                return $ordenResponsavels->getResponsavel();
+            },
+            $this->ordenResponsavels->toArray()
+        );
+        
     }
 }
