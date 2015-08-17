@@ -7,34 +7,35 @@
  */
 
 /**
- * Description of TipoPartoType
+ * Description of OneResponsavelType
  *
- * @author liester
+ * @author julio
  */
 
-namespace DailyWorkBundle\Form\TipoParto;
+namespace DailyWorkBundle\Form\Responsavel_F;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TipoPartoType extends AbstractType{
+class OneResponsavelType extends AbstractType{
     
-     public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         parent::buildForm($builder, $options);
 
-        $builder->add('nTipoParto', 'text',array('label' => false));
+        $builder->add('orden', null,array('label' => 'Orden'));
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => '\EntityBundle\Entity\TipoParto'
+            'data_class' => '\EntityBundle\Entity\Orden_Responsavel'
         ));
     }
 
     public function getName() {
-        return 'becker_entitybundle_ntipoparto';
+        return 'orden_responsavel';
     }
     
-    
+
 }

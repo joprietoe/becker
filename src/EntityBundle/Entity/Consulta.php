@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Consulta
  *
- * @ORM\Table(name="consulta", indexes={@ORM\Index(name="IDX_A6FE3FDEC6CBA95E", columns={"paciente"})})
+ * @ORM\Table(name="consulta")
  * @ORM\Entity
  */
 class Consulta
@@ -41,8 +41,9 @@ class Consulta
      *
      * @ORM\ManyToOne(targetEntity="Paciente")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="paciente", referencedColumnName="id_paciente")
+     *   @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente")
      * })
+     *  
      */
     private $paciente;
 
@@ -110,7 +111,7 @@ class Consulta
      * @param \EntityBundle\Entity\Paciente $paciente
      * @return Consulta
      */
-    public function setPaciente(\EntityBundle\Entity\Paciente $paciente = null)
+    public function setPaciente(\EntityBundle\Entity\Paciente $paciente)
     {
         $this->paciente = $paciente;
 

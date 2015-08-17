@@ -35,7 +35,7 @@ class PacienteType extends AbstractType {
         $builder
                 ->add('nome', 'text', array('max_length' => 100, 'label'=>'Nome'))
                 ->add('data_nascimento', 'text')
-                ->add('factor_rh')
+                ->add('tipoSanguineo','entity', array('class'=> 'EntityBundle:TipoSanguineo', 'multiple' => false))
                 ->add('problemas_gravidez', 'textarea')
                 ->add('leite_artificial', 'checkbox')
                 ->add('depressao_puerperal', 'textarea')
@@ -58,13 +58,13 @@ class PacienteType extends AbstractType {
                 'by_reference'   => false
                 ))
                 
-                ->add('nTipoParto', new TipoParto\TipoPartoType(), array(
+                ->add('tipoParto', new TipoParto\TipoPartoType(), array(
                 'label'          => 'Tipo de parto',
                 'by_reference'   => false
                  ))
                 
-                ->add('nProblemasSaude', 'entity', array('class'=> 'EntityBundle:NProblemasSaude', 'multiple' => true))
-                ->add('nCuidados',  'entity', array('class' => 'EntityBundle:NCuidados', 'multiple' => true)); 
+                ->add('problemasSaude', 'entity', array('class'=> 'EntityBundle:ProblemasSaude', 'multiple' => true))
+                ->add('nCuidados',  'entity', array('class' => 'EntityBundle:Cuidados', 'multiple' => true));
                 //        new Responsavel\ResponsavelType(), array('label' => ' '));
                
     }

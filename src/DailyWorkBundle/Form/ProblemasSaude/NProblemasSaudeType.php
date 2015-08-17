@@ -25,7 +25,7 @@ class NProblemasSaudeType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) {
         parent::buildForm($builder, $options);
 
-        $builder->add('form-field-select-4', 'entity', array('class'=> 'EntityBundle:NProblemasSaude', 'multiple' => true));      
+        $builder->add('choice', 'entity', array('class'=> 'EntityBundle:ProblemasSaude', 'multiple' => true));
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
