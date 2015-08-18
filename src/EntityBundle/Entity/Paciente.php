@@ -111,7 +111,7 @@ class Paciente
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Paciente_Cuidado", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\ManyToMany(targetEntity="Paciente_Cuidado", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
      */
     private $nCuidados;
 
@@ -543,5 +543,10 @@ class Paciente
             $this->ordenResponsavels->toArray()
         );
         
+    }
+
+    public function getOresponsavel()
+    {
+        return $this->ordenResponsavels;
     }
 }

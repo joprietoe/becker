@@ -30,7 +30,7 @@ class ProblemasSaude
     private $nombrePsaude;
 
     /**
-     * @ORM\OneToMany(targetEntity="Paciente_problemasSaude", mappedBy="problemaSaude", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\OneToMany(targetEntity="Paciente_ProblemasSaude", mappedBy="problemaSaude", cascade={"persist", "remove"}, orphanRemoval=TRUE)
      */
     private $pacienteProblemasSaude;
 

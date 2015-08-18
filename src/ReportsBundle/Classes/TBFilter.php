@@ -80,11 +80,11 @@ class TBFilter extends Filter{
         # JOIN ...
     }
     public function whereDQL($obj){
-        return $obj.'.'.'nTipoSanguineo LIKE :id ';
+        return $obj.'.'.'tipoSanguineo = :id ';
     }
     public function setFilter($query){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         if($this->name != null){
-            $query->setParameter('id', '%'.$this->name.'%');
+            $query->setParameter('id', $this->id);
         }
         return $query;
     }
@@ -98,18 +98,17 @@ class TBFilter extends Filter{
         return 'bloodDelete';
     }
     public function filterValues($doctrine){
+        //$repositoryP = $doctrine->getManager()->getRepository('EntityBundle:Paciente');
         
-        $repositoryTB = $this->getManager()->getRepository('AppBReportsBundle:NTipoSanguineo');
-        $repositoryP = $this->getManager()->getRepository('AppBReportsBundle:Paciente');
+        $repositoryTB = $doctrine->getManager()->getRepository('EntityBundle:TipoSanguineo');
+        
         $tblood = $repositoryTB->findAll();
         $res = Array();
         foreach ($tblood as $tb){
-            $qb = $repositoryP->createQueryBuilder('p');
-            $qb->select('COUNT(b)');
-            $qb->where('b.id_tipo_sanguineo = :id');
-            $qb->setParameter('id', $tb->id_tipo_sanguineo);
-            $elem = Array('id' => $tb->id_tipo_sanguineo, 'text' => $tb->nome.$tb->factorrh,'number' => $qb->getQuery()->getSingleScalarResult() );
+            $elem = Array('id' => $tb->getIdTipoSanguineo(), 'text' => $tb->getNome());
             array_push($res, $elem);
         }
+        
+        return $res;
     }
 }

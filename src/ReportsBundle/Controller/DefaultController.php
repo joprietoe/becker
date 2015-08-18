@@ -97,6 +97,8 @@ class DefaultController extends Controller {
         }
 
         $query = $querySelect . ' ' . $queryFROM . ' ' . $queryWhere . ' ' . ' ORDER BY p.nome ASC';
+        #var_dump($query);
+        #die();
         $em = $this->getDoctrine()->getManager();
         $docQuery = $em->createQuery($query);
 
@@ -144,10 +146,10 @@ class DefaultController extends Controller {
 
     // Genera los botones de los filtros puestos hasta el momento ...
     public function filterPageAction(Request $request) {
-
         $session = $request->getSession();
         $filter_name = new FilterNome($session);
-        $filters = $filter_name->genActiveFilter();
+        $filter_blood = new TBFilter($session);
+        $filters = array_merge($filter_name->genActiveFilter(),$filter_blood->genActiveFilter());
         return $this->render('ReportsBundle:Default:filterElements.html.twig', array(
                     'filters' => $filters
         ));
@@ -162,16 +164,27 @@ class DefaultController extends Controller {
     public function filterAction(Request $request) {
         $session = $request->getSession();
         if ($request->request->has('filter')) {
-            $filter_name = new FilterNome($session);
 
             switch ($request->request->get('filter')) {
                 case 'NM':
+                    $filter_name = new FilterNome($session);
                     if ($request->request->get('action') == 'add') {
                         $filter_name->setName($request->request->get('name'));
                         $filter_name->setMatch($request->request->get('match'));
               
                     } else if ($request->request->get('action') == 'del') {
                         $filter_name->setName(null);
+                    }
+                    break;
+                case 'TB':
+  
+                    $filter_blood = new TBFilter($session);
+                    if ($request->request->get('action') == 'add') {
+                        $filter_blood->setIdTB($request->request->get('id'));
+                        $filter_blood->setName($request->request->get('name'));
+              
+                    } else if ($request->request->get('action') == 'del') {
+                        $filter_blood->setName(null);
                     }
                     break;
                 default:
@@ -193,6 +206,19 @@ class DefaultController extends Controller {
     public function patientRedirectAction($id){
         return new RedirectResponse($this->generateUrl('inicio'));
         # return new RedirectResponse($this->generateUrl('-----').$id);
+    }
+    
+    
+    
+    // Genera los elementos del filtro de sangre 
+    public  function bloodFilterAction(Request $request){
+        $session = $request->getSession();
+        $filter_blood = new TBFilter($session);
+        
+        $elems = $filter_blood->filterValues($this->getDoctrine());
+        return $this->render('ReportsBundle:Default:bloodFilter.html.twig', array(
+                    'elems' => $elems
+        ));
     }
 
 }

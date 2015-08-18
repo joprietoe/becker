@@ -5,8 +5,11 @@
         <group>
             <file>file:/var/www/html/becker/src/ReportsBundle/Controller/DefaultController.php</file>
             <file>file:/var/www/html/becker/src/ReportsBundle/Resources/views/Default/filterElements.html.twig</file>
+            <file>file:/var/www/html/becker/src/ReportsBundle/Resources/views/Default/data.html.twig</file>
             <file>file:/var/www/html/becker/src/ReportsBundle/Classes/FilterNome.php</file>
+            <file>file:/var/www/html/becker/src/ReportsBundle/Resources/views/Default/dashboard.html.twig</file>
             <file>file:/var/www/html/becker/src/ReportsBundle/Classes/TBFilter.php</file>
+            <file>file:/var/www/html/becker/src/ReportsBundle/Resources/views/Default/bloodFilter.html.twig</file>
             <file>file:/var/www/html/becker/web/bundles/general/js/_others/filter.js</file>
         </group>
     </open-files>

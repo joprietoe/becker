@@ -234,14 +234,22 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::indexAction',  '_route' => 'daily_work_homepage',);
             }
 
-            // daily_work
-            if ($pathinfo === '/d_w/dw') {
-                return array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::daily_workAction',  '_route' => 'daily_work',);
-            }
+            if (0 === strpos($pathinfo, '/d_w/dw')) {
+                // daily_work
+                if ($pathinfo === '/d_w/dw') {
+                    return array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::daily_workAction',  '_route' => 'daily_work',);
+                }
 
-            // consulta_page
-            if (preg_match('#^/d_w/(?P<id_paciente>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'consulta_page')), array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::consultaAction',));
+                // consulta_page
+                if (preg_match('#^/d_w/dw/(?P<id_paciente>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'consulta_page')), array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::consultaAction',));
+                }
+
+                // actualizar_page
+                if (0 === strpos($pathinfo, '/d_w/dw/dw_e') && preg_match('#^/d_w/dw/dw_e/(?P<id_paciente>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'actualizar_page')), array (  '_controller' => 'DailyWorkBundle\\Controller\\DefaultController::actualizarAction',));
+                }
+
             }
 
         }

@@ -22,7 +22,7 @@ class Paciente_ProblemasSaude {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="orden_responsavels")
+     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="problemasSaudes")
      * @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente", nullable=FALSE)
      */
     private $paciente;
