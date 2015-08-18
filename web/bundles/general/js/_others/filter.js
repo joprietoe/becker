@@ -8,6 +8,8 @@ $(document).ready(function (){
     $('.blood').click(tBlood);
     $('#nome-id').click(nomeAdd);  
     $('#mail').click(maillist);
+    $('.blood_class').click(bloodDelete);
+    $('.nome_class').click(nomeDelete);
     //$('.my-delete').click(my_delete);
     path = $('#url').val();
 });
@@ -96,9 +98,6 @@ function nomeAdd(){
             }
         });
     }
-    else{
-        alert('Tem que inserir um nome');
-    }
 };
 
 //Acciones a ejecutar cuando se annade un filtro de tipo blood. 
@@ -112,7 +111,7 @@ function tBlood(){
     var tmp = this;
     sendfilter(path+'/r/ajaxfilter/',json, function(data){
           if(data.status == 'OK'){
-                addFilter('filtBlood',$(tmp).attr('name')   ,bloodDelete);
+                addFilter('bl_'+$(tmp).attr('id'),$(tmp).attr('name')   ,bloodDelete);
                 updateData(data.result, data.paginator);
           }
         });
@@ -121,11 +120,11 @@ function bloodDelete(){
     var json= { 
             'filter':'TB',
             'action':'del',
-            'id':'',
+            'id':$(this).attr('id'),
             'name':''
         };
     //alert($(this).attr('id'));
-    $('#filtBlood').remove();
+    $(this).remove();
     sendfilter(path+'/r/ajaxfilter/', json, function(data){
         if(data.status == 'OK'){
             updateData(data.result,data.paginator);

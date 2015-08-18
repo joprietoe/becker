@@ -17,60 +17,69 @@ use ReportsBundle\Classes\Filter;
  */
 class TBFilter extends Filter{
     
-    protected $id;
-    protected $name;
+    protected $filters;
     function __construct($session) {
         $this->session = $session;
-        if($this->session->has('id_tb') && trim($this->session->get('id_tb')) != ''){
-            $this->id = $this->session->get('id_tb');
+        if($this->session->has('blood')){
+            $this->filters = json_decode( $this->session->get('blood'), true);
+            if(!is_array($this->filters)){
+                die();
+            }
         }
         else{
-            $this->id = null;
-        }
-        if($this->session->has('name_tb') && trim($this->session->get('name_tb')) != ''){
-            $this->name = $this->session->get('name_tb');
-        }
-        else{
-            $this->name = null;
+            $this->filters = null;
         }
     }
-    public function getIdTB(){
-        return $this->id;
-    }
-    
-    public function setIdTB($id){
+    public function addFilter($id, $name){
         if($id == null){
-            $this->session->remove('id_tb');
-            $this->id = null;
+            $this->session->remove('blood');
+            $this->filters = null;
+        }
+        else if($this->filters == null){
+            
+            $this->filters = Array(Array('id'=>$id, 'name'=>$name));
+            $this->session->set('blood', json_encode($this->filters));
         }
         else{
-            $this->id = $id;
-            $this->session->set('id_tb', $id);
+            array_push($this->filters, Array('id'=>$id, 'name'=>$name));
+            $this->session->set('blood', json_encode($this->filters));
         }
-    }
-    public function setName($filter_name){
-        if($filter_name == null){
-            $this->session->remove('name_tb');
-            $this->name = null;
-        }
-        else{
-            $this->name = $filter_name;
-            $this->session->set('name_tb', $filter_name);
+    } 
+    public function remFilter($id){
+        if($this->filters != null){
+            $i=0;
+            foreach($this->filters as $f){
+                if('bl_'.$f['id'] == $id){
+                    array_splice($this->filters, $i,1);
+                    break;
+                }
+                $i = $i+1;
+            }
+            if(count($this->filters) == 0){
+                $this->session->remove('blood');
+                $this->filters = null;
+            }
+            else{
+                $this->session->set('blood', json_encode($this->filters));
+            }
         }
     }
     # Para uso de quitar filtro
     public function genActiveFilter(){
-        if($this->id != null){
-            
-            return array (
-                array ('name' => $this->name,'id' => 'filtBlood','onclick' => 'bloodDelete')
-            );
+        if($this->filters != null){
+            $result = Array();
+            #var_dump($this->filters);
+            #die();
+            foreach($this->filters as $f){
+                array_push($result,Array('name' => $f['name'],'id' => 'bl_'.$f['id'],'my_class' => $this->my_class()));
+            }
+            return $result;
         }
          
         return Array();
     }
     public function hasMatch(){
-        if($this->name != null && trim($this->name)!=''){
+        if($this->filters != null){
             return true;
         }
         return false;
@@ -80,22 +89,37 @@ class TBFilter extends Filter{
         # JOIN ...
     }
     public function whereDQL($obj){
-        return $obj.'.'.'tipoSanguineo = :id ';
+        $result = '';
+        $i = 0;
+        foreach($this->filters as $f){
+            if($i == 0){
+                $result = $obj.'.'.'tipoSanguineo = :id'.$i.' ';
+            }
+            else{
+                $result = $result.' OR '.$obj.'.'.'tipoSanguineo = :id'.$i.' ';
+            }
+            $i = $i +1;
+        }
+        return $result;
     }
     public function setFilter($query){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-        if($this->name != null){
-            $query->setParameter('id', $this->id);
+        if($this->filters != null){
+            $i = 0;
+            foreach($this->filters as $f){
+                $query->setParameter('id'.$i, $f['id']);
+                $i = $i+1; 
+            }
         }
         return $query;
     }
     public function filtercount(){
         if(hasMatch()){
-            return 1;
+            return count($this->filters);
         }
         return 0;
     }
-    public function getOnclik(){
-        return 'bloodDelete';
+    public function my_class(){
+        return 'blood_class';
     }
     public function filterValues($doctrine){
         //$repositoryP = $doctrine->getManager()->getRepository('EntityBundle:Paciente');

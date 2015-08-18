@@ -97,8 +97,6 @@ class DefaultController extends Controller {
         }
 
         $query = $querySelect . ' ' . $queryFROM . ' ' . $queryWhere . ' ' . ' ORDER BY p.nome ASC';
-        #var_dump($query);
-        #die();
         $em = $this->getDoctrine()->getManager();
         $docQuery = $em->createQuery($query);
 
@@ -106,12 +104,11 @@ class DefaultController extends Controller {
             #$querySelect = $querySelect.'';
             $docQuery = $filter->setFilter($docQuery);
         }
-
+        
         if ($page >= 1) {
             $docQuery->setMaxResults($this->rows);
             $docQuery->setFirstResult(((int) ($page - 1)) * $this->rows);
         }
-
         return $docQuery->getResult();
     }
     
@@ -176,15 +173,12 @@ class DefaultController extends Controller {
                         $filter_name->setName(null);
                     }
                     break;
-                case 'TB':
-  
+                case 'TB':  
                     $filter_blood = new TBFilter($session);
                     if ($request->request->get('action') == 'add') {
-                        $filter_blood->setIdTB($request->request->get('id'));
-                        $filter_blood->setName($request->request->get('name'));
-              
+                        $filter_blood->addFilter($request->request->get('id'), $request->request->get('name'));
                     } else if ($request->request->get('action') == 'del') {
-                        $filter_blood->setName(null);
+                        $filter_blood->remFilter($request->request->get('id'));
                     }
                     break;
                 default:
