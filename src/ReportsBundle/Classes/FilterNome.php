@@ -73,7 +73,7 @@ class FilterNome extends Filter{
             }
             $name = substr($this->name,0,$num).$points;
             return array (
-                array ('name' => $name,'id' => 'filtName','onclick' => 'nomeDelete')
+                array ('name' => $name,'id' => 'filtName','my_class' => $this->my_class())
             );
         }
          
@@ -85,8 +85,8 @@ class FilterNome extends Filter{
         }
         return 0;
     }
-    public function getOnclik(){
-        return 'nomeDelete';
+    public function my_class(){
+        return 'nome_class';
     }
     public function fromDQL($obj){
         return "";

@@ -8,22 +8,29 @@ $(document).ready(function (){
     $('.blood').click(tBlood);
     $('#nome-id').click(nomeAdd);  
     $('#mail').click(maillist);
-    $('.my-delete').click(my_delete);
+    $('.blood_class').click(bloodDelete);
+    $('.nome_class').click(nomeDelete);
+    //$('.my-delete').click(my_delete);
     path = $('#url').val();
 });
 
 //path = '/becker/web/app_dev.php'; 
 
+// Funcion para enviar datos AJAX via post
 function sendfilter(url ,jsondata, callback){
     $.post(url,jsondata,callback,'json');
 };
-function my_delete(){
+/*function my_delete(){
     alert($(this).parent().parent().parent().attr('id'));
     //$(this).parent('tr');
-};
+};*/
+
+// A ejecutar para crear una lista de correos...
 function maillist(){
     alert('make list');
 };
+
+// Annade un nuevo filtro en la lista de filtros
 function addFilter(id,text, onClick){
     var num =10;
     var points = '...';
@@ -31,14 +38,18 @@ function addFilter(id,text, onClick){
         num = text.length;
         points = '';
     }
-    var elem = $('<a id="'+id+''+'" class="actfilter"> <span  class="label label-lg label-pink arrowed-right" style="cursor: hand;" >'+
+    var elem = $('<a id="'+id+''+'" class="actfilter"> <span  class="label label-lg label-grey arrowed-right" style="cursor: hand;" >'+
             text.substr(0,num)+points+'</span></a>');
     $('#filters').append(elem);
     elem.click(onClick);
 };
+
+// Elimina un elemento del html
 function remFilter(id){
     $('#'+id).remove();
 };
+
+// Acciones a realizar cuando se elimina un filtro de tipo nome
 function nomeDelete(){
     var json= { 
             'filter':'NM',
@@ -58,10 +69,14 @@ function nomeDelete(){
         
     });
 };
+
+//Actualiza la secccion de datos 
 function updateData(html, paginator){
     $('#mytbody').html(html);
     $('#my-paginator').html(paginator);
 };
+
+//Acciones a ejecutar cuando se annade un filtro de tipo nome ...
 function nomeAdd(){
     if($('#filtername').val()!="" && $('#filtername').val()!=null){
         var check = 'false';
@@ -76,34 +91,59 @@ function nomeAdd(){
             'pos':$('#filters').children().length,
             'match':check
         };
-        sendfilter('/becker/web/app_dev.php/r/ajaxfilter/', json, function(data){
+        sendfilter(path+'/r/ajaxfilter/', json, function(data){
             if(data.status == 'OK'){
                 addFilter('filtName',$('#filtername').val(),nomeDelete);
                 updateData(data.result, data.paginator);
             }
         });
     }
-    else{
-        alert('Tem que inserir um nome');
-    }
 };
+
+//Acciones a ejecutar cuando se annade un filtro de tipo blood. 
 function tBlood(){
     var json= {
+            'action':'add',
             'filter':'TB',
-            'id':$(this).attr('id')
+            'id':$(this).attr('id'),
+            'name':$(this).attr('name')
         };
-    sendfilter('/ajaxfilter/tBlood',json, function(data){
-           // alert(data);
+    var tmp = this;
+    sendfilter(path+'/r/ajaxfilter/',json, function(data){
+          if(data.status == 'OK'){
+                addFilter('bl_'+$(tmp).attr('id'),$(tmp).attr('name')   ,bloodDelete);
+                updateData(data.result, data.paginator);
+          }
         });
-    alert($(this).attr('id'));
 };
+function bloodDelete(){
+    var json= { 
+            'filter':'TB',
+            'action':'del',
+            'id':$(this).attr('id'),
+            'name':''
+        };
+    //alert($(this).attr('id'));
+    $(this).remove();
+    sendfilter(path+'/r/ajaxfilter/', json, function(data){
+        if(data.status == 'OK'){
+            updateData(data.result,data.paginator);
+        }
+        else{
+            alert('Fiter non founded');
+        }
+        
+    });
+};
+
+// A ejecutar cuando se hace click en el filtro years
 function clickYears(){                   
     var json= {
             'filter':'YE',
             'from':$(this).attr('from'),
             'to':$(this).attr('to')
         };
-    sendfilter('/ajaxfilter/years',json, function(data){
+    sendfilter('...',json, function(data){
            // alert(data);
         });  
     alert($(this).attr('id'));

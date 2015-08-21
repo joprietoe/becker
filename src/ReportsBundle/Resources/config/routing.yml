@@ -11,5 +11,7 @@ reports_page:
     path: /{actualPage}
     defaults: { _controller: ReportsBundle:Default:indexPage }
     
-
+reports_patient:
+    path: /{id}/patient
+    defaults: { _controller: ReportsBundle:Default:patientRedirect }
     

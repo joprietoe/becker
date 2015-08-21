@@ -239,34 +239,7 @@
                                             <i class="icon-double-angle-right"></i>
                                             Tipo de sangue                                          
                                         </a>
-                                        <ul class="submenu">
-                                            <li class="disabled">
-                                                <a href="#">
-                                                    <i class="icon-double-angle-right"></i>
-                                                    A+ 
-                                                </a>
-                                            </li>
-
-                                            <li class="disabled">
-                                                <a href="#">
-                                                    <i class="icon-double-angle-right"></i>
-                                                      A-
-                                                </a>
-                                            </li>
-                                            <li class="disabled">
-                                                <a href="#">
-                                                    <i class="icon-double-angle-right"></i>
-                                                      AB+                                  
-                                                </a>
-                                            </li>
-                                            <li class="disabled">
-                                                <a href="#">
-                                                    <i class="icon-double-angle-right"></i>
-                                                      AB-                                  
-                                                </a>
-                                            </li>
-
-                                         </ul>
+                                        {{render(controller('ReportsBundle:Default:bloodFilter'))}}
                                     </li>                                
                                     
                                     <li class="disabled">

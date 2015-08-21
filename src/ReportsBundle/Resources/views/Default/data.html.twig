@@ -4,19 +4,19 @@
             <ul class="list-unstyled spaced2 pnome">
                 <li class="muted align-left align-middle">
                     <i class="icon-angle-right bigger-110"></i>
-                    <a>{{d.nome}}</a>                                            
+                    <a href="{{path('reports_homepage')}}{{d.getIdPaciente()}}/patient">{{d.getNome()}}</a>                                            
                 </li>
             </ul>
         </td>
-        <td class="center">
+       <!-- <td class="center">
             <ul class="list-unstyled spaced2">
-                {%for p in d.responsavel %}
+                {#%for p in d.getResponsavel() %#}
                     <li class="muted align-left">
                         <i class="icon-angle-right bigger-110"></i>
-                        {{p.nome}} - {{p.email}} - {{p.telefContato}}  </li>
-                    {%endfor%}
+                        {#{p.getNome()}#} - {#{p.email}#} - {#{p.telefContato}#}  </li>
+                    {#%endfor%#}
             </ul>
-        </td>
+        </td> -->
 
         <td class="hidden-480 center">                                            
             <ul class="list-unstyled spaced2">                                              
@@ -32,7 +32,7 @@
         <td class="center">
             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                <button  name="{#proyecto.id#}" value="{# app.request.BaseUrl #}" onclick="//mostrar_proyecto(this)" class="btn btn-link btn-link-ajustado tooltip-info " data-placement="bottom" data-rel="tooltip" data-original-title="Editar">
+                <button  name="{#proyecto.id#}" value="{# app.request.BaseUrl #}" onclick="window.location.replace('{{path('reports_homepage')}}{{d.idPaciente}}/patient');" class="btn btn-link btn-link-ajustado tooltip-info " data-placement="bottom" data-rel="tooltip" data-original-title="Editar">
                     <i class="icon-edit bigger-230 blue"></i>
                 </button>    
                 <button name="subtarea" value="{#proyecto.id#}" class="btn btn-link btn-link-ajustado tooltip-default" data-rel="tooltip" data-placement="bottom"  type="submit"

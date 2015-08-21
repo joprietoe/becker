@@ -15,8 +15,8 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8 = $this->env->getExtension("native_profiler");
-        $__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8->enter($__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "ReportsBundle:Default:data.html.twig"));
+        $__internal_ad905640fab95382fb1f809361c46dacb6a6faaf88bd422d21582ac85bcc64f0 = $this->env->getExtension("native_profiler");
+        $__internal_ad905640fab95382fb1f809361c46dacb6a6faaf88bd422d21582ac85bcc64f0->enter($__internal_ad905640fab95382fb1f809361c46dacb6a6faaf88bd422d21582ac85bcc64f0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "ReportsBundle:Default:data.html.twig"));
 
         // line 1
         $context['_parent'] = (array) $context;
@@ -28,39 +28,31 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
             <ul class=\"list-unstyled spaced2 pnome\">
                 <li class=\"muted align-left align-middle\">
                     <i class=\"icon-angle-right bigger-110\"></i>
-                    <a>";
+                    <a href=\"";
             // line 7
-            echo twig_escape_filter($this->env, $this->getAttribute($context["d"], "nome", array()), "html", null, true);
+            echo $this->env->getExtension('routing')->getPath("reports_homepage");
+            echo twig_escape_filter($this->env, $this->getAttribute($context["d"], "getIdPaciente", array(), "method"), "html", null, true);
+            echo "/patient\">";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["d"], "getNome", array(), "method"), "html", null, true);
             echo "</a>                                            
                 </li>
             </ul>
         </td>
-        <td class=\"center\">
+       <!-- <td class=\"center\">
             <ul class=\"list-unstyled spaced2\">
                 ";
-            // line 13
-            $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["d"], "responsavel", array()));
-            foreach ($context['_seq'] as $context["_key"] => $context["p"]) {
-                // line 14
-                echo "                    <li class=\"muted align-left\">
+            // line 14
+            echo "                    <li class=\"muted align-left\">
                         <i class=\"icon-angle-right bigger-110\"></i>
                         ";
-                // line 16
-                echo twig_escape_filter($this->env, $this->getAttribute($context["p"], "nome", array()), "html", null, true);
-                echo " - ";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["p"], "email", array()), "html", null, true);
-                echo " - ";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["p"], "telefContato", array()), "html", null, true);
-                echo "  </li>
+            // line 16
+            echo " - ";
+            echo " - ";
+            echo "  </li>
                     ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['p'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
             // line 18
             echo "            </ul>
-        </td>
+        </td> -->
 
         <td class=\"hidden-480 center\">                                            
             <ul class=\"list-unstyled spaced2\">                                              
@@ -84,7 +76,10 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
                 <button  name=\"";
             // line 35
             echo "\" value=\"";
-            echo "\" onclick=\"//mostrar_proyecto(this)\" class=\"btn btn-link btn-link-ajustado tooltip-info \" data-placement=\"bottom\" data-rel=\"tooltip\" data-original-title=\"Editar\">
+            echo "\" onclick=\"window.location.replace('";
+            echo $this->env->getExtension('routing')->getPath("reports_homepage");
+            echo twig_escape_filter($this->env, $this->getAttribute($context["d"], "idPaciente", array()), "html", null, true);
+            echo "/patient');\" class=\"btn btn-link btn-link-ajustado tooltip-info \" data-placement=\"bottom\" data-rel=\"tooltip\" data-original-title=\"Editar\">
                     <i class=\"icon-edit bigger-230 blue\"></i>
                 </button>    
                 <button name=\"subtarea\" value=\"";
@@ -190,7 +185,7 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
 
 ";
         
-        $__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8->leave($__internal_ec128a04278bc6916923bbdfe291dda6cca8d781aff52a06e1547ec178594fb8_prof);
+        $__internal_ad905640fab95382fb1f809361c46dacb6a6faaf88bd422d21582ac85bcc64f0->leave($__internal_ad905640fab95382fb1f809361c46dacb6a6faaf88bd422d21582ac85bcc64f0_prof);
 
     }
 
@@ -206,6 +201,6 @@ class __TwigTemplate_607100e32f32f9e6b38d225f6fc1c3cec02b5d350fed21d30cffdab2268
 
     public function getDebugInfo()
     {
-        return array (  186 => 108,  166 => 93,  158 => 87,  149 => 80,  144 => 77,  136 => 72,  118 => 56,  110 => 50,  103 => 45,  100 => 44,  92 => 38,  86 => 35,  80 => 31,  71 => 25,  62 => 18,  50 => 16,  46 => 14,  42 => 13,  33 => 7,  26 => 2,  22 => 1,);
+        return array (  181 => 108,  161 => 93,  153 => 87,  144 => 80,  139 => 77,  131 => 72,  113 => 56,  105 => 50,  98 => 45,  95 => 44,  87 => 38,  78 => 35,  72 => 31,  63 => 25,  54 => 18,  49 => 16,  45 => 14,  33 => 7,  26 => 2,  22 => 1,);
     }
 }

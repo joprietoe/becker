@@ -22,14 +22,19 @@ class Paciente_Cuidado
     private $id;
 
    /**
-     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="nCuidados")
+     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="orden_responsavels")
      * @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente", nullable=FALSE)
      */
     private $paciente;
 
     /**
+<<<<<<< HEAD
      * @ORM\ManyToOne(targetEntity="Cuidados", inversedBy="pacienteCuidado")
      *@ORM\JoinColumn(name="cuidado_id", referencedColumnName="id_cuidado", nullable=FALSE)
+=======
+     * @ORM\ManyToOne(targetEntity="Cuidados", inversedBy="nCuidados")
+     * @ORM\JoinColumn(name="cuidado_id", referencedColumnName="id_cuidado", nullable=FALSE)
+>>>>>>> bbdfb68738e53026548035e5f2d7b1a8a464d164
      */
     private $cuidado;
 

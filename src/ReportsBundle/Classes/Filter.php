@@ -19,5 +19,5 @@ abstract class Filter {
     abstract protected function setFilter($query);
     abstract protected function hasMatch();
     abstract protected function genActiveFilter();
-    abstract protected function getOnclik();
+    abstract protected function my_class();
 }

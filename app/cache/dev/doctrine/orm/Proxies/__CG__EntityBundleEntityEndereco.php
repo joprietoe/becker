@@ -64,10 +64,10 @@ class Endereco extends \EntityBundle\Entity\Endereco implements \Doctrine\ORM\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'idEndereco', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'cep');
+            return array('__isInitialized__', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'idEndereco', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'cep', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'pacientes');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'idEndereco', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'cep');
+        return array('__isInitialized__', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'idEndereco', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'cep', '' . "\0" . 'EntityBundle\\Entity\\Endereco' . "\0" . 'pacientes');
     }
 
     /**
@@ -208,6 +208,28 @@ class Endereco extends \EntityBundle\Entity\Endereco implements \Doctrine\ORM\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCep', array());
 
         return parent::getCep();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPaciente(\Doctrine\Common\Collections\ArrayCollection $pacientes)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPaciente', array($pacientes));
+
+        return parent::setPaciente($pacientes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPaciente()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPaciente', array());
+
+        return parent::getPaciente();
     }
 
     /**

@@ -15,8 +15,8 @@ class __TwigTemplate_a51496fda8894579f2f042d52d359e2c39a974094530a13e8f4b8d816d6
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7c0ba21c9668372bbe0ec023bb6ed846270bac04dba9611a90995ae699e36285 = $this->env->getExtension("native_profiler");
-        $__internal_7c0ba21c9668372bbe0ec023bb6ed846270bac04dba9611a90995ae699e36285->enter($__internal_7c0ba21c9668372bbe0ec023bb6ed846270bac04dba9611a90995ae699e36285_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "ReportsBundle:Default:filterElements.html.twig"));
+        $__internal_4561bfa2bd6428ae959d049ffec377304ab1132b0fc007f7f6cc0b87336459a2 = $this->env->getExtension("native_profiler");
+        $__internal_4561bfa2bd6428ae959d049ffec377304ab1132b0fc007f7f6cc0b87336459a2->enter($__internal_4561bfa2bd6428ae959d049ffec377304ab1132b0fc007f7f6cc0b87336459a2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "ReportsBundle:Default:filterElements.html.twig"));
 
         // line 1
         echo "<div id=\"filters\" class=\"btn-group\">
@@ -28,10 +28,10 @@ class __TwigTemplate_a51496fda8894579f2f042d52d359e2c39a974094530a13e8f4b8d816d6
             // line 3
             echo "        <a id=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "id", array()), "html", null, true);
-            echo "\"  class=\"actfilter\" onclick=\"";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "onclick", array()), "html", null, true);
-            echo "()\">
-            <span  class=\"label label-lg label-pink arrowed-right\" style=\"cursor: hand;\">
+            echo "\"  class=\"";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "my_class", array()), "html", null, true);
+            echo "\">
+            <span  class=\"label label-lg label-grey arrowed-right\" style=\"cursor: hand;\">
                 ";
             // line 5
             echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "name", array()), "html", null, true);
@@ -59,7 +59,7 @@ class __TwigTemplate_a51496fda8894579f2f042d52d359e2c39a974094530a13e8f4b8d816d6
 </a>
 -->";
         
-        $__internal_7c0ba21c9668372bbe0ec023bb6ed846270bac04dba9611a90995ae699e36285->leave($__internal_7c0ba21c9668372bbe0ec023bb6ed846270bac04dba9611a90995ae699e36285_prof);
+        $__internal_4561bfa2bd6428ae959d049ffec377304ab1132b0fc007f7f6cc0b87336459a2->leave($__internal_4561bfa2bd6428ae959d049ffec377304ab1132b0fc007f7f6cc0b87336459a2_prof);
 
     }
 
