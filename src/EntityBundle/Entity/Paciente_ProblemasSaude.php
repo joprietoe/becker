@@ -22,7 +22,7 @@ class Paciente_ProblemasSaude {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="orden_responsavels")
+     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="paciente_problemasSaude")
      * @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente", nullable=FALSE)
      */
     private $paciente;
@@ -81,13 +81,13 @@ class Paciente_ProblemasSaude {
         return $this->paciente;
     }
 
-    public function setDetalhes($detalhes = null) {
+    public function setDetalhesPsalud($detalhes = null) {
         $this->detalhes_psalud = $detalhes;
 
         return $this;
     }
 
-    public function getDetalhes() {
+    public function getDetalhesPsalud() {
         return $this->detalhes_psalud;
     }
 
@@ -112,25 +112,5 @@ class Paciente_ProblemasSaude {
         return $this->problemaSaude;
     }
 
-    /**
-     * Set orden
-     *
-     * @param integer $orden
-     * @return Responsavel_Paciente
-     */
-    public function setOrden($orden) {
-        $this->orden = $orden;
-
-        return $this;
-    }
-
-    /**
-     * Get orden
-     *
-     * @return integer 
-     */
-    public function getOrden() {
-        return $this->orden;
-    }
 
 }

@@ -22,13 +22,13 @@ class Orden_Responsavel
     private $id;
 
    /**
-     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="orden_responsavels")
+     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="ordenResponsavels")
      * @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente", nullable=FALSE)
      */
     private $paciente;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Responsavel", inversedBy="orden_responsavels")
+     * @ORM\ManyToOne(targetEntity="Responsavel", inversedBy="ordenResponsavels")
      * @ORM\JoinColumn(name="responsavel_id", referencedColumnName="id_responsavel", nullable=FALSE)
      */
     private $responsavel;
@@ -41,6 +41,11 @@ class Orden_Responsavel
     private $orden;
 
 
+    /*public function __construct($paciente, $responsabel) {
+        $this->responsavel =  $responsabel;
+        $this
+        ;
+    }*/
     /**
      * Get id
      *

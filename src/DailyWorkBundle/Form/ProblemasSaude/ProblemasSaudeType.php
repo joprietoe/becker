@@ -7,29 +7,29 @@
  */
 
 /**
- * Description of ResponsavelType
+ * Description of NProblemasSaudeType
  *
  * @author julio
  */
 
-namespace DailyWorkBundle\Form\Responsavel_F;
+namespace DailyWorkBundle\Form\ProblemasSaude;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ResponsavelType extends AbstractType{
+class ProblemasSaudeType extends AbstractType{
     
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+     public function buildForm(FormBuilderInterface $builder, array $options) {
         parent::buildForm($builder, $options);
 
         $builder
-                ->add('nome', 'text')
-                ->add('ocupacao')
-                ->add('telefContato', 'text',  array('label' => 'Telef de Contato'))
-                ->add('email', 'email')
-                ->add('ordenResponsavels', 'collection', array(
-                'type'           => new OneResponsavelType(),
+                //->add('nombrePsaude', 'text')
+         ->add('nombrePsaude', 'entity', array('class' => 'EntityBundle:ProblemasSaude',
+             'multiple' => true,
+             'required' => false));
+                /*->add('paciente_problemassaude', 'collection', array(
+                'type'           => new \Paciente_ProblemasSaudeType(),
                 //'label'          => 'Orden Responsavels',
                 'by_reference'   => false,
                 'required'       => false     
@@ -39,7 +39,7 @@ class ResponsavelType extends AbstractType{
                 //'attr'           => array(
                  //   'class' => 'row addresses'
                 //)
-            ));
+            ));*/
                 //->add('nome1', 'text')
                 //->add('ocupacao1')
                 //->add('telefContato1', 'text',  array('label' => 'Telef de Contato'))
@@ -60,13 +60,16 @@ class ResponsavelType extends AbstractType{
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => '\EntityBundle\Entity\Responsavel'
+            'data_class' => '\EntityBundle\Entity\ProblemasSaude'
         ));
     }
 
     public function getName() {
-        return 'becker_entitybundle_responsaveltype';
+        return 'becker_problemassaude';
     }
     
-
+    
+    
+    
+    
 }

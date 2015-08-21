@@ -30,7 +30,8 @@ class ProblemasSaude
     private $nombrePsaude;
 
     /**
-     * @ORM\OneToMany(targetEntity="Paciente_problemasSaude", mappedBy="problemaSaude", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\OneToMany(targetEntity="Paciente_ProblemasSaude", mappedBy="problemaSaude", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\JoinColumn(name="pacienteproblemassaude_id", referencedColumnName="id", nullable=FALSE)
      */
     private $pacienteProblemasSaude;
 
@@ -84,8 +85,8 @@ class ProblemasSaude
     
     public function addPacienteProblemasSaude(Paciente_ProblemasSaude $p_problemassaude)
     {
-        if (!$this->ordenResponsavels->contains($p_problemassaude)) {
-            $this->ordenResponsavels->add($p_problemassaude);
+        if (!$this->pacienteProblemasSaude->contains($p_problemassaude)) {
+            $this->pacienteProblemasSaude->add($p_problemassaude);
             $p_problemassaude->setProblemaSaude($this);
         }
 

@@ -39,13 +39,20 @@ class Consulta
     /**
      * @var \Paciente
      *
-     * @ORM\ManyToOne(targetEntity="Paciente")
+     * @ORM\ManyToOne(targetEntity="Paciente" inversedBy="consulta")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente")
      * })
      *  
      */
     private $paciente;
+    
+    /**
+     * @var blob
+     *
+     * @ORM\Column(name="metodo", type="blob", nullable=true)
+     */
+    private $metodo;
 
 
 
@@ -126,6 +133,29 @@ class Consulta
     public function getPaciente()
     {
         return $this->paciente;
+    }
+    
+    /**
+     * Set metodo
+     *
+     * @param blob
+     * @return Consulta
+     */
+    public function setMetodo($metodo)
+    {
+        $this->metodo = $metodo;
+
+        return $this;
+    }
+
+    /**
+     * Get metodo
+     *
+     * @return blob 
+     */
+    public function getMetodo()
+    {
+        return $this->metodo;
     }
     
     public function __toString() {

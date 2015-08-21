@@ -31,6 +31,9 @@ class TipoParto
 
 
 
+    public function __construct($tipoParto) {
+        $this->tipoParto = $tipoParto;
+    }
     /**
      * Get idTipoParto
      *
@@ -47,12 +50,12 @@ class TipoParto
      * @param string $tipoParto
      * @return TipoParto
      */
-    public function setTipoParto($tipoParto)
+    /*public function setTipoParto($tipoParto)
     {
         $this->tipoParto = $tipoParto;
 
         return $this;
-    }
+    }*/
 
     /**
      * Get tipoParto
@@ -61,6 +64,10 @@ class TipoParto
      */
     public function getTipoParto()
     {
+        return $this->tipoParto;
+    }
+    
+    public function __toString() {
         return $this->tipoParto;
     }
     

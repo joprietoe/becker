@@ -23,13 +23,27 @@ class OneResponsavelType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) {
         parent::buildForm($builder, $options);
 
-        $builder->add('orden', null,array('label' => 'Orden'));
+       /* $builder
+            ->add('responsavel', new ResponsavelType(), array(
+                //'label'          => 'Direcciones',
+                //'by_reference'   => false,
+                'required'=> false
+            ))
+            ->add('responsavel1', new ResponsavelType(), array(
+                //'label'          => 'Direcciones',
+                //'by_reference'   => false,
+                'required'=> false
+            ))
+            ->add('orden', null,array('label' => 'Orden', 'required'=>false));*/
+        $builder->add('orden', null,array('label' => 'Orden', 'required'=>false));
+        
 
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
             'data_class' => '\EntityBundle\Entity\Orden_Responsavel'
+            //'data_class' => null
         ));
     }
 

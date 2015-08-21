@@ -28,6 +28,10 @@ class TipoSanguineo
      * @ORM\Column(name="nome", type="string", length=3, nullable=false)
      */
     private $nome;
+    
+    public function __construct($tipoNome) {
+        $this->nome = $tipoNome;
+    }
 
     /**
      * Get idTipoSanguineo
@@ -62,5 +66,8 @@ class TipoSanguineo
         return $this->nome;
     }
 
-    
+    public function __toString()
+    {
+        return $this->getNome();
+    }
 }

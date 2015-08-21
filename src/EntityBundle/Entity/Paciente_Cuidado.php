@@ -28,8 +28,8 @@ class Paciente_Cuidado
     private $paciente;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cuidados", inversedBy="nomeCuidado")
-     * @ORM\JoinColumn(name="cuidado_id", referencedColumnName="id_cuidado", nullable=FALSE)
+     * @ORM\ManyToOne(targetEntity="Cuidados", inversedBy="pacienteCuidado")
+     *@ORM\JoinColumn(name="cuidado_id", referencedColumnName="id_cuidado", nullable=FALSE)
      */
     private $cuidado;
 

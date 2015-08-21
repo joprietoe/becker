@@ -32,17 +32,16 @@ class Endereco
     private $cep;
 
      /**
-     * Bidirectional INVERSED SIDE
-     * @var \Paciente
-     *
-     * @ORM\OneToMany(targetEntity="Paciente", mappedBy="endereco", cascade={"persist", "remove"})
+     * 
+     * @ORM\OneToMany(targetEntity="Responsavel", mappedBy="endereco", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="responsavel_id", referencedColumnName="id_responsavel") 
      * 
      */
-    private $pacientes;
+    private $responsavel;
         
 
     public function __construct() {
-        $this->pacientes = new ArrayCollection();;
+        $this->responsavel = new ArrayCollection();
     }
     /**
      * Get idEndereco
@@ -77,16 +76,16 @@ class Endereco
         return $this->cep;
     }
     
-    public function setPaciente(ArrayCollection $pacientes){
+    public function setResponsavel(ArrayCollection $responsavel){
          
-        $this->pacientes = $pacientes;
-        foreach ($pacientes as $paciente) {
-            $paciente->setEndereco($this); 
+        $this->responsavel = $responsavel;
+        foreach ($responsavel as $resp) {
+            $resp->setEndereco($this); 
         }
     }
     
-    public function getPaciente(){
-        return $this->pacientes;
+    public function getResponsavel(){
+        return $this->responsavel;
     }
 
 

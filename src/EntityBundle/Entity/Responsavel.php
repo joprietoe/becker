@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="responsavel")
  * @ORM\Entity
  */
-class Responsavel
-{
+class Responsavel {
+
     /**
      * @var integer
      *
@@ -52,25 +52,39 @@ class Responsavel
 
     /**
      * @ORM\OneToMany(targetEntity="Orden_Responsavel", mappedBy="responsavel", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\JoinColumn(name="ordenresponsavels_id", referencedColumnName="id", nullable=FALSE)
      */
     private $ordenResponsavels;
+
+    
+    /**
+     * @var \Endereco
+     *
+     * @ORM\ManyToOne(targetEntity="Endereco", inversedBy="responsavel")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="endereco_id", referencedColumnName="id_endereco")
+     * })
+     */
+    private $endereco;
 
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
+        /* $this->nome = $nome;
+          $this->ocupacao = $ocupacao;
+          $this->email = $email;
+          $this->telefContato = $tele; */
         $this->ordenResponsavels = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->endereco = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get idResponsavel
      *
      * @return integer 
      */
-    public function getIdResponsavel()
-    {
+    public function getIdResponsavel() {
         return $this->idResponsavel;
     }
 
@@ -80,8 +94,7 @@ class Responsavel
      * @param string $nome
      * @return Responsavel
      */
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
 
         return $this;
@@ -92,8 +105,7 @@ class Responsavel
      *
      * @return string 
      */
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
 
@@ -103,8 +115,7 @@ class Responsavel
      * @param string $ocupacao
      * @return Responsavel
      */
-    public function setOcupacao($ocupacao)
-    {
+    public function setOcupacao($ocupacao) {
         $this->ocupacao = $ocupacao;
 
         return $this;
@@ -115,8 +126,7 @@ class Responsavel
      *
      * @return string 
      */
-    public function getOcupacao()
-    {
+    public function getOcupacao() {
         return $this->ocupacao;
     }
 
@@ -126,8 +136,7 @@ class Responsavel
      * @param integer $telefContato
      * @return Responsavel
      */
-    public function setTelefContato($telefContato)
-    {
+    public function setTelefContato($telefContato) {
         $this->telefContato = $telefContato;
 
         return $this;
@@ -138,8 +147,7 @@ class Responsavel
      *
      * @return integer 
      */
-    public function getTelefContato()
-    {
+    public function getTelefContato() {
         return $this->telefContato;
     }
 
@@ -149,8 +157,7 @@ class Responsavel
      * @param string $email
      * @return Responsavel
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -161,19 +168,15 @@ class Responsavel
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
-    
-    public function getOrdenResponsavels()
-    {
+
+    public function getOrdenResponsavels() {
         return $this->ordenResponsavels->toArray();
     }
-    
-    
-    public function addOrdenResponsavels(Orden_Responsavel $o_responsavel)
-    {
+
+    public function addOrdenResponsavel(Orden_Responsavel $o_responsavel) {
         if (!$this->ordenResponsavels->contains($o_responsavel)) {
             $this->ordenResponsavels->add($o_responsavel);
             $o_responsavel->setResponsavel($this);
@@ -181,9 +184,8 @@ class Responsavel
 
         return $this;
     }
-    
-    public function removeOrdenResponsavels(Orden_Responsavel $o_responsavel)
-    {
+
+    public function removeOrdenResponsavel(Orden_Responsavel $o_responsavel) {
         if ($this->ordenResponsavels->contains($o_responsavel)) {
             $this->ordenResponsavels->removeElement($o_responsavel);
             $o_responsavel->setResponsavel(null);
@@ -191,15 +193,23 @@ class Responsavel
 
         return $this;
     }
-    
-    public function getPacientes()
-    {
+
+    public function getPacientes() {
         return array_map(
-            function ($ordenResponsavels) {
-                return $ordenResponsavels->getPaciente();
-            },
-            $this->ordenResponsavels->toArray()
+                function ($ordenResponsavels) {
+            return $ordenResponsavels->getPaciente();
+        }, $this->ordenResponsavels->toArray()
         );
+    }
+
+    public function setEndereco(\EntityBundle\Entity\Endereco $endereco = null) {
+        $this->endereco = $endereco;
+
+        return $this;
+    }
+
+    public function getEndereco() {
+        return $this->endereco;
     }
 
     /**
@@ -208,57 +218,54 @@ class Responsavel
      * @param integer $idPaciente
      * @return Responsavel
      *
-    public function setIdPaciente($idPaciente)
-    {
-        $this->idPaciente = $idPaciente;
+      public function setIdPaciente($idPaciente)
+      {
+      $this->idPaciente = $idPaciente;
 
-        return $this;
-    }*/
-
+      return $this;
+      } */
     /**
      * Get idPaciente
      *
      * @return integer 
      *
-    public function getIdPaciente()
-    {
-        return $this->idPaciente;
-    }*/
-
+      public function getIdPaciente()
+      {
+      return $this->idPaciente;
+      } */
     /**
      * Add paciente
      *
      * @param \EntityBundle\Entity\Paciente $paciente
      * @return Responsavel
      *
-    public function addPaciente(\EntityBundle\Entity\Paciente $paciente)
-    {
-        $this->paciente[] = $paciente;
+      public function addPaciente(\EntityBundle\Entity\Paciente $paciente)
+      {
+      $this->paciente[] = $paciente;
 
-        return $this;
-    }*/
-
+      return $this;
+      } */
     /**
      * Remove paciente
      *
      * @param \EntityBundle\Entity\Paciente $paciente
      *
-    public function removePaciente(\EntityBundle\Entity\Paciente $paciente)
-    {
-        $this->paciente->removeElement($paciente);
-    }*/
+      public function removePaciente(\EntityBundle\Entity\Paciente $paciente)
+      {
+      $this->paciente->removeElement($paciente);
+      } */
 
     /**
      * Get paciente
      *
      * @return \Doctrine\Common\Collections\Collection 
      *
-    public function getPaciente()
-    {
-        return $this->paciente;
-    }*/
-    
+      public function getPaciente()
+      {
+      return $this->paciente;
+      } */
     public function __toString() {
         return $this->getNome();
     }
+
 }

@@ -45,7 +45,7 @@
                                                     <span class="step">4</span>
                                                     <span class="title">Problemas de saude</span>
                                                 </li>
-                                                
+
                                                 <li data-target="#step5">
                                                     <span class="step">5</span>
                                                     <span class="title">Cuidados</span>
@@ -57,7 +57,7 @@
                                         <div class="step-content row-fluid position-relative" id="step-container">
                                             <form class="form-horizontal" id="sample-form" action="{{ path('daily_work_homepage') }}" method="post" name="ficha">
                                                 <div class="step-pane active" id="step1">
-                                                   <!-- <h4 class="lighter block green">Registre os dados principais do paciente</h4> -->
+                                                    <!-- <h4 class="lighter block green">Registre os dados principais do paciente</h4> -->
 
                                                     <div class="form-group">
                                                         <label class="col-sm-3 control-label"> {{form_label(formulario.nome)}} </label>
@@ -97,12 +97,12 @@
                                                         {{form_widget(formulario.problemas_gravidez, { 'attr': {'class' : 'autosize-transition', 
                                                                                                    'style':'overflow: hidden; word-wrap: break-word; resize: horizontal;height:92px;width: 60%;'} }) }}
                                                     </div>
-                                                    
+
                                                     <div class="form-group">
                                                         <label class="col-sm-3 control-label"> {{form_label(formulario.tipoParto)}} </label>
                                                         {{form_widget(formulario.tipoParto, { 'attr': {'class' : 'col-xs-10 col-sm-5'} }) }}
                                                     </div>
-                                                    
+
                                                     <div class="form-group">
                                                         <label class="col-sm-3 control-label"> {{form_label(formulario.problemas_posparto)}} </label>
                                                         {{form_widget(formulario.problemas_posparto, { 'attr': {'class' : 'autosize-transition', 'style':'overflow: hidden; word-wrap: break-word; resize: horizontal;height:92px;width: 60%;'} }) }}
@@ -139,95 +139,84 @@
                                                         </div>                   
                                                     </div>
                                                 </div>
-                                                            
+                                                {%set hFlag = true%}
                                                 <div class="step-pane" id="step3">
                                                     <h4 class="lighter block green">Registre os dados do primeiro responsavel</h4>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label"> {{form_label(formulario.ordenresponsavels.responsavel.nome)}} </label>
+                                                    {% for responsavel in formulario.responsavels %}
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label"> {{form_label(responsavel.nome)}} </label>
 
-                                                        {{ form_widget(formulario.ordenresponsavels.responsavel.nome, { 'attr': {'class' : 'col-xs-10 col-sm-5'} }) }}
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label"> {{form_label(formulario.ordenresponsavels.responsavel.ocupacao)}} </label>
-                                                        {#{{form_label(formulario.nome, { 'attr': {'class' : 'col-sm-3'} }) }}#}
-                                                        {{ form_widget(formulario.ordenresponsavels.responsavel.ocupacao, { 'attr': {'class' : 'col-xs-10 col-sm-5'} }) }}
-                                                    </div>
-                                                    <div class="form-group tl">
-                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-phone" >{{form_label(formulario.ordenresponsavels.responsavel.telefContato)}} </label>
-
-                                                        <div class="col-sm-9">
-                                                            <span class="input-icon input-icon-right">
-                                                                {{ form_widget(formulario.ordenresponsavels.responsavel.telefContato, { 'attr': {'class' : 'input-mask-phone'} }) }}
-                                                                <i class="icon-phone"></i>
-                                                            </span>
+                                                            {{ form_widget(responsavel.nome, { 'attr': {'class' : 'col-xs-10 col-sm-5'} }) }}
                                                         </div>
-                                                    </div>
-
-                                                   <div class="form-group tl">
-                                                               <label class="col-sm-3 control-label no-padding-right" for="form-field-email" > {{form_label(formulario.ordenresponsavels.responsavel.email)}}                                                                   <i class="smaller-60 icon-vertical-aling-bottom tooltip-obligatorio" data-placement="right" data-rel="tooltip"></i>
-                                                       </label>
-
-                                                    <div class="col-sm-9">
-                                                        <span class="input-icon input-icon-right">
-                                                            {{form_widget(formulario.ordenresponsavels.responsavel.email,  { 'attr': {'class' : 'p_email'} }) }}
-                                                            <i class="icon-envelope"></i>
-                                                        </span>
-                                                    </div>
-                                                   </div>
-
-                                                   <hr>
-                                                   <h4 class="lighter block green">Registre os dados do segundo responsavel</h4>
-                                                   <div class="form-group">
-                                                        <label class="col-sm-3 control-label"> {{form_label(formulario.ordenresponsavels.responsavel.nome)}} </label>
-                                                        {#{{form_label(formulario.nome, { 'attr': {'class' : 'col-sm-3'} }) }}#}
-                                                        {{ form_widget(formulario.ordenresponsavels.responsavel1.nome, { 'attr': {'class' : 'col-xs-10 col-sm-5'} }) }}
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label"> {{form_label(formulario.ordenresponsavels.responsavel.ocupacao)}} </label>
-                                                        {#{{form_label(formulario.nome, { 'attr': {'class' : 'col-sm-3'} }) }}#}
-                                                        {{ form_widget(formulario.ordenresponsavels.responsavel1.ocupacao, { 'attr': {'class' : 'col-xs-10 col-sm-5'} }) }}
-                                                    </div>
-                                                    <div class="form-group tl">
-                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-phone" >{{form_label(formulario.ordenresponsavels.responsavel.telefContato)}} </label>
-
-                                                        <div class="col-sm-9">
-                                                            <span class="input-icon input-icon-right">
-                                                                {{ form_widget(formulario.ordenresponsavels.responsavel1.telefContato, { 'attr': {'class' : 'input-mask-phone'} }) }}
-                                                                <i class="icon-phone"></i>
-                                                            </span>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label"> {{form_label(responsavel.ocupacao)}} </label>
+                                                            {#{{form_label(formulario.nome, { 'attr': {'class' : 'col-sm-3'} }) }}#}
+                                                            {{ form_widget(responsavel.ocupacao, { 'attr': {'class' : 'col-xs-10 col-sm-5'} }) }}
                                                         </div>
-                                                    </div>
+                                                        <div class="form-group tl">
+                                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-phone" >{{form_label(responsavel.telefContato)}} </label>
 
-                                                   <div class="form-group tl">
-                                                               <label class="col-sm-3 control-label no-padding-right" for="form-field-email" > {{form_label(formulario.ordenresponsavels.responsavel.email)}}                                                                   <i class="smaller-60 icon-vertical-aling-bottom tooltip-obligatorio" data-placement="right" data-rel="tooltip"></i>
-                                                       </label>
+                                                            <div class="col-sm-9">
+                                                                <span class="input-icon input-icon-right">
+                                                                    {{ form_widget(responsavel.telefContato, { 'attr': {'class' : 'input-mask-phone'} }) }}
+                                                                    <i class="icon-phone"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
 
-                                                    <div class="col-sm-9">
-                                                        <span class="input-icon input-icon-right">
-                                                            {{form_widget(formulario.ordenresponsavels.responsavel1.email,  { 'attr': {'class' : 'p_email'} }) }}
-                                                            <i class="icon-envelope"></i>
-                                                        </span>
-                                                    </div>
-                                                   </div>
+                                                        <div class="form-group tl">
+                                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-email" > {{form_label(responsavel.email)}}                                                                   <i class="smaller-60 icon-vertical-aling-bottom tooltip-obligatorio" data-placement="right" data-rel="tooltip"></i>
+                                                            </label>
+
+                                                            <div class="col-sm-9">
+                                                                <span class="input-icon input-icon-right">
+                                                                    {{form_widget(responsavel.email,  { 'attr': {'class' : 'p_email'} }) }}
+                                                                    <i class="icon-envelope"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        {% if hFlag == true%}
+                                                            <h4 class="lighter block green">Registre os dados do segundo responsavel</h4>
+                                                            {% set hFlag = false%}
+                                                        {% endif %}    
+                                                        {#<li>{{ form_row(resp.nome) }}</li>
+                                                        <li>{{ form_row(resp.ocupacao) }}</li>
+                                                        <li>{{ form_row(resp.telefContato) }}</li>
+                                                        <li>{{ form_row(resp.email) }}</li>#}
+
+
+                                                    {%endfor%}
+
+
 
                                                 </div>
 
                                                 <div class="step-pane" id="step4">
-                                                     
-                                                   
+
+
                                                     <label for="form-field-select-4">Problemas de saude: <i class="icon-asterisk red smaller-60 icon-vertical-aling-bottom tooltip-obligatorio" data-placement="right" data-rel="tooltip" data-original-title="Campo obligatorio"></i></label>
-                                                            &nbsp;&nbsp;&nbsp;{{ form_widget(formulario.problemasSaude, { 'id': 'form-field-select-4', 'attr': {'class' : 'chosen-select', 'placeholder':"Horas en la crece"}  }) }}
-                                                            
+                                                    &nbsp;&nbsp;&nbsp;{#{ form_widget(formulario.problemasSaude, { 'id': 'form-field-select-4', 'attr': {'class' : 'chosen-select', 'placeholder':"Horas en la crece"}  }) }#}
+
+                                                   <ul>
+                                                        {% for ps in formulario.paciente_problemasSaude %}
+                                                            <li>{{ form_row(ps.edadeDiagnostico) }}</li>
+                                                            <li>{{ form_row(ps.detalhes_psalud) }}</li>
+                                                            <li>{{ form_widget(ps.problemaSaude) }}</li>
+                                                        {% endfor %}
+                                                  </ul>
+
+
+
                                                 </div>
-                                                            
+
                                                 <div class="step-pane " id="step5">
-                                                    
+
                                                     <div class="form-group">
-                                                    <label for="form-field-select-4" class="col-sm-3 control-label">Cuidados <i class="icon-asterisk red smaller-60 icon-vertical-aling-bottom tooltip-obligatorio" data-placement="right" data-rel="tooltip" data-original-title="Campo obligatorio"></i></label>
-                                                    &nbsp;&nbsp;&nbsp;{{ form_widget(formulario.nCuidados, { 'id': 'form-field-select-4-1', 'attr': {'class' : 'chosen-select'}  }) }}
+                                                       <label for="form-field-select-4" class="col-sm-3 control-label">Cuidados <i class="icon-asterisk red smaller-60 icon-vertical-aling-bottom tooltip-obligatorio" data-placement="right" data-rel="tooltip" data-original-title="Campo obligatorio"></i></label>
+                                                        &nbsp;&nbsp;&nbsp;{{ form_widget(formulario.nCuidados, { 'id': 'form-field-select-4-1', 'attr': {'class' : 'chosen-select'}  }) }}
                                                     </div>
-                                                    
-                                                        
+
+
                                                     <div class="form-group ">
                                                         <label for="form-field-select-4" class="col-sm-3 control-label">Horas en la crece </label>
                                                         <input type="text" class="col-xs-10 col-sm-5" placeholder="Horas en la crece" id="ncuidades_crece">

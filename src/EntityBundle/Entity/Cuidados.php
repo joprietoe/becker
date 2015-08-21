@@ -31,6 +31,7 @@ class Cuidados {
 
     /**
      * @ORM\OneToMany(targetEntity="Paciente_Cuidado", mappedBy="cuidado", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     *
      */
     private $pacienteCuidado;
 

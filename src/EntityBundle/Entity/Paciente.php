@@ -85,8 +85,8 @@ class Paciente
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="endereco", referencedColumnName="id_endereco")
      * })
-     */
-    private $endereco;
+     
+    private $endereco;*/
 
     /**
      * @var \TipoParto
@@ -112,22 +112,33 @@ class Paciente
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Paciente_Cuidado", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     *
      */
     private $nCuidados;
 
    /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Paciente_ProblemasSaude", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+    *
+     * @ORM\OneToMany(targetEntity="Paciente_ProblemasSaude", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+    *   @ORM\JoinColumn(name="pacienteproblemasSaude_id", referencedColumnName="id")
      */
-    private $problemasSaudes;
+    private $paciente_problemasSaude;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Orden_Responsavel", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\OneToMany(targetEntity="Orden_Responsavel", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\JoinColumn(name="ordenresponsavels_id", referencedColumnName="id")
      */
     private $ordenResponsavels;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Consulta", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\JoinColumn(name="consulta_id", referencedColumnName="id_consulta")
+     */
+    private $consulta;
     
         
     /**
@@ -136,9 +147,9 @@ class Paciente
     public function __construct()
     {
         $this->nCuidados = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->problemasSaudes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->paciente_problemasSaude = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ordenResponsavels = new \Doctrine\Common\Collections\ArrayCollection();
-       // $this->consultas = new \Doctrine\Common\Collections\ArrayCollection();
+       $this->consulta = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -338,7 +349,7 @@ class Paciente
     }
 
 
-    public function setEndereco(\EntityBundle\Entity\Endereco $endereco = null)
+    /*public function setEndereco(\EntityBundle\Entity\Endereco $endereco = null)
     {
         $this->endereco = $endereco;
 
@@ -350,10 +361,10 @@ class Paciente
      *
      * @return \EntityBundle\Entity\Endereco 
      */
-    public function getEndereco()
+    /*public function getEndereco()
     {
         return $this->endereco;
-    }
+    }*/
 
     /**
      * Set TipoParto
@@ -449,28 +460,31 @@ class Paciente
     }
 
     /**
-     * Add nProblemasSaude
+     * Add Paciente_ProblemasSaude
      *
      * @param \EntityBundle\Entity\ProblemasSaude $nProblemasSaude
      * @return Paciente
      */
-    public function addProblemasSaude(\EntityBundle\Entity\Orden_Responsavel $p_problemassaude)
+    public function addPacienteProblemasSaude(\EntityBundle\Entity\Paciente_ProblemasSaude $p_problemassaude = null)
     {
-         if (!$this->problemasSaudes->contains($p_problemassaude)) {
-            $this->problemasSaudes->add($p_problemassaude);
+         if (!$this->paciente_problemasSaude->contains($p_problemassaude) && $p_problemassaude != null) {
+            $this->paciente_problemasSaude->add($p_problemassaude);
             $p_problemassaude->setPaciente($this);
         }
 
         return $this;
     }
 
-    
+    public function getPacienteProblemasSaude()
+    {
+        return $this->paciente_problemasSaude;
+    }
     
     public function removePacienteProblemasSaude(\EntityBundle\Entity\Paciente_ProblemasSaude $p_problemassaude)
     {
-        $this->problemasSaudes->removeElement($o_responsavel);
-        if ($this->problemasSaudes->contains($o_responsavel)) {
-            $this->problemasSaudes->removeElement($o_responsavel);
+        $this->paciente_problemasSaude->removeElement($o_responsavel);
+        if ($this->paciente_problemasSaude->contains($o_responsavel)) {
+            $this->paciente_problemasSaude->removeElement($o_responsavel);
             $p_problemassaude->setPaciente(null);
         }
         
@@ -478,42 +492,49 @@ class Paciente
     }
 
     /**
-     * Get nProblemasSaude
+     * Get ProblemasSaude
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
     public function getProblemasSaude()
     {
-        return array_map(
-            function ($problemasSaudes) {
-                return $problemasSaudes->getProblemaSaude();
+        $ps_l = [];
+        foreach ($this->paciente_problemasSaude as $ps)
+            $ps_l[] = $ps->getProblemaSaude();
+        return $ps_l;
+        
+        /*return array_map(
+            function ($problemasSaude) {
+                return $problemasSaude->getProblemaSaude();
             },
-            $this->problemasSaudes->toArray()
-        );
+            $this->problemasSaude->toArray()
+        );*/
     }
 
 
 
     /**
-     * Add responsavel
+     * 
      *
-     * @param \EntityBundle\Entity\Responsavel $responsavel
+     * @param \EntityBundle\Entity\Orden_Responsavel $o_responsavel
      * @return Paciente
      */
-    public function addOrdenResponsavel(\EntityBundle\Entity\Orden_Responsavel $o_responsavel)
+    public function addOrdenResponsavel(\EntityBundle\Entity\Orden_Responsavel $o_responsavel= null)
     {
         //$this->responsavel[] = $responsavel;
-        if (!$this->ordenResponsavels->contains($o_responsavel)) {
+
+        if (!$this->ordenResponsavels->contains($o_responsavel) && $o_responsavel != null) {
             $this->ordenResponsavels->add($o_responsavel);
             $o_responsavel->setPaciente($this);
         }
 
         return $this;
+
     }
 
     
     /**
-     * Remove responsavel
+     * 
      *
      * @param \EntityBundle\Entity\Responsavel $responsavel
      */
@@ -528,20 +549,74 @@ class Paciente
         return $this;
     }
     
+    
+    
+    public function getOrdenResponsavels()
+    {
+        return $this->ordenResponsavels;
+    }
+    
    
     /**
-     * Get responsavel
+     * Get responsavels
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getResponsavel()
-    {
-        return array_map(
-            function ($ordenResponsavels) {
-                return $ordenResponsavels->getResponsavel();
-            },
-            $this->ordenResponsavels->toArray()
-        );
-        
+    public function getResponsavels() {
+        $resp = [];
+        foreach ($this->ordenResponsavels as $r)
+            $resp[] = $r->getResponsavel();
+        return $resp;
     }
+    
+    
+    
+     /**
+     * 
+     *
+     * @param \EntityBundle\Entity\Consulta $consulta
+     * @return Paciente
+     */
+    public function addConsulta(\EntityBundle\Entity\Consulta $consulta= null)
+    {
+        //$this->responsavel[] = $responsavel;
+
+        if (!$this->consulta->contains($consulta) && $consulta != null) {
+            $this->consulta->add($consulta);
+            $consulta->setPaciente($this);
+        }
+
+        return $this;
+
+    }
+
+    
+    /**
+     * 
+     *
+     * @param \EntityBundle\Entity\Consulta $consulta
+     */
+    public function removeConsulta(\EntityBundle\Entity\Consulta $consulta)
+    {
+        $this->consulta->removeElement($consulta);
+        if ($this->consulta->contains($consulta)) {
+            $this->consulta->removeElement($consulta);
+            $consulta->setPaciente(null);
+        }
+        
+        return $this;
+    }
+    
+    
+    
+    public function getConsulta()
+    {
+        return $this->consulta;
+    }
+    
+   
+    
+
+
+    
 }
