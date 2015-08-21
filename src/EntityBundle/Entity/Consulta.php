@@ -39,7 +39,7 @@ class Consulta
     /**
      * @var \Paciente
      *
-     * @ORM\ManyToOne(targetEntity="Paciente" inversedBy="consulta")
+     * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="consulta")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente")
      * })

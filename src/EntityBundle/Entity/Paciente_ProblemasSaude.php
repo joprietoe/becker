@@ -22,17 +22,14 @@ class Paciente_ProblemasSaude {
     private $id;
 
     /**
-<<<<<<< HEAD
      * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="paciente_problemasSaude")
-=======
      * @ORM\ManyToOne(targetEntity="Paciente", inversedBy="problemasSaudes")
->>>>>>> bbdfb68738e53026548035e5f2d7b1a8a464d164
      * @ORM\JoinColumn(name="paciente_id", referencedColumnName="id_paciente", nullable=FALSE)
      */
     private $paciente;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProblemasSaude", inversedBy="pacienteProblemasSaude")
+     * @ORM\ManyToOne(targetEntity="ProblemasSaude", inversedBy="pacienteProblemasSaude", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="problemassaude_id", referencedColumnName="id_problemassaude", nullable=FALSE)
      */
     private $problemaSaude;

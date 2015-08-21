@@ -31,10 +31,7 @@ class ProblemasSaude
 
     /**
      * @ORM\OneToMany(targetEntity="Paciente_ProblemasSaude", mappedBy="problemaSaude", cascade={"persist", "remove"}, orphanRemoval=TRUE)
-<<<<<<< HEAD
      * @ORM\JoinColumn(name="pacienteproblemassaude_id", referencedColumnName="id", nullable=FALSE)
-=======
->>>>>>> bbdfb68738e53026548035e5f2d7b1a8a464d164
      */
     private $pacienteProblemasSaude;
 
@@ -117,7 +114,10 @@ class ProblemasSaude
         );
     }
     
+    
     public function __toString() {
+         
         return $this->getNombrePsaude();
+       
     } 
 }

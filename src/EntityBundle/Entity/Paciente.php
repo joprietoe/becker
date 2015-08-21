@@ -91,7 +91,7 @@ class Paciente
     /**
      * @var \TipoParto
      *
-     * @ORM\OneToOne(targetEntity="TipoParto")
+     * @ORM\OneToOne(targetEntity="TipoParto", cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipoParto", referencedColumnName="idtipoparto")
      * })
@@ -101,7 +101,7 @@ class Paciente
     /**
      * @var \TipoSanguineo
      *
-     * @ORM\OneToOne(targetEntity="TipoSanguineo")
+     * @ORM\OneToOne(targetEntity="TipoSanguineo", cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipoSanguineo", referencedColumnName="idtiposanguineo")
      * })
@@ -111,12 +111,7 @@ class Paciente
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-<<<<<<< HEAD
-     * @ORM\OneToMany(targetEntity="Paciente_Cuidado", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
-     *
-=======
      * @ORM\ManyToMany(targetEntity="Paciente_Cuidado", mappedBy="paciente", cascade={"persist", "remove"}, orphanRemoval=TRUE)
->>>>>>> bbdfb68738e53026548035e5f2d7b1a8a464d164
      */
     private $nCuidados;
 
@@ -154,6 +149,7 @@ class Paciente
         $this->paciente_problemasSaude = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ordenResponsavels = new \Doctrine\Common\Collections\ArrayCollection();
        $this->consulta = new \Doctrine\Common\Collections\ArrayCollection();
+       $this->leiteArtificial = false;
     }
 
 
@@ -617,18 +613,14 @@ class Paciente
     {
         return $this->consulta;
     }
-<<<<<<< HEAD
-    
-   
-    
-
-
-    
-=======
 
     public function getOresponsavel()
     {
         return $this->ordenResponsavels;
     }
->>>>>>> bbdfb68738e53026548035e5f2d7b1a8a464d164
+    
+    public function __toString() {
+        return $this->nome;
+    }
+
 }

@@ -194,12 +194,19 @@ class Responsavel {
         return $this;
     }
 
+    
     public function getPacientes() {
-        return array_map(
+        
+       $pacientes = [];
+        foreach ($this->ordenResponsavels as $pa)
+            $pacientes[] = $pa->getPaciente();
+        return $pacientes;
+        
+        /*return array_map(
                 function ($ordenResponsavels) {
             return $ordenResponsavels->getPaciente();
         }, $this->ordenResponsavels->toArray()
-        );
+        );*/
     }
 
     public function setEndereco(\EntityBundle\Entity\Endereco $endereco = null) {
@@ -266,6 +273,7 @@ class Responsavel {
       } */
     public function __toString() {
         return $this->getNome();
+    
     }
 
 }

@@ -28,7 +28,7 @@ class Orden_Responsavel
     private $paciente;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Responsavel", inversedBy="ordenResponsavels")
+     * @ORM\ManyToOne(targetEntity="Responsavel", inversedBy="ordenResponsavels", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="responsavel_id", referencedColumnName="id_responsavel", nullable=FALSE)
      */
     private $responsavel;
